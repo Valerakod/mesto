@@ -22,7 +22,7 @@
         <h1 class="profile__name">Валерия Емец</h1>
         <button class="profile__edit-button">
         </button>
-        <p class="profile__description">Студентка Яндекс.Практикум</p>
+        <p class="profile__job">Студентка Яндекс.Практикум</p>
       </div>
       <button class="profile__add-button">
       </button>
@@ -68,12 +68,12 @@
     <p class="footer__copyright">&copy; 2021. Валерия Емец</p>
   </footer>
 
-  <div class="popup popup_opened">
+  <div class="popup">
     <div class="popup__container">
-      <form class="popup__form">
+      <form class="popup__form" method="post">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input class="popup__text" placeholder="Валерия Емец" type="text" required>
-        <input class="popup__text" placeholder="Студентка Яндекс.Практикум" type="text" required>
+        <input class="popup__text popup__text_check_name" placeholder="Валерия Емец" type="text" required>
+        <input class="popup__text popup__text_check_job" placeholder="Студентка Яндекс.Практикум" type="text" required>
         <button class="popup__save-button">Сохранить</button>
       </form>
       <button class="popup__close-button"></button>

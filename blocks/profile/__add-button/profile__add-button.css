@@ -8,6 +8,11 @@
   background: url(../../../images/Vector-3.svg);
   background-repeat: no-repeat;
   background-position: center;
+  transition: 0.5s;
+}
+
+.profile__add-button:hover {
+  opacity: 0.6;
 }
 
 @media (max-width: 767px) and (min-width: 320px) {

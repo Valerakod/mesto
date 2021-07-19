@@ -1,5 +1,13 @@
 .element__heart {
   width: 22px;
+  height: 19px;
   padding: 0 0 0 0px;
   margin: 0 20px 0 0;
+  transition: 0.5s;
+  border: none;
+
+
+}
+.element__heart:hover {
+  opacity: 0.6;
 }

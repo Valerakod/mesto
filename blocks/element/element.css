@@ -6,6 +6,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  overflow: hidden;
 }
 
 @media (max-width: 767px) and (min-width: 320px) {

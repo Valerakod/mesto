@@ -4,12 +4,35 @@ let saveButton = document.querySelector(".popup__save-button")
 let closeButton = document.querySelector(".popup__close-button")
 
 function popupOpen() {
-  editPopup.classList.add(".popup_opened")
+  editPopup.classList.add("popup_opened")
 }
 
 function popupClose() {
-  editPopup.classList.remove(".popup_opened")
+  editPopup.classList.remove("popup_opened")
 }
 
 editButton.addEventListener('click', popupOpen)
 closeButton.addEventListener('click', popupClose)
+saveButton.addEventListener('click', popupClose)
+
+let formElement = document.querySelector(".popup__form")
+
+let nameInput = document.querySelector(".popup__text_check_name")
+let jobInput = document.querySelector(".popup__text_check_job")
+
+
+function formSubmitHandler(evt) {
+  evt.preventDefault();
+  console.log(nameInput.value, jobInput.value)
+
+
+  let profileName = document.getElementByld(".profile__name")
+  let profileJob = document.getElementById(".profile__job")
+
+  console.log(profileName.textContent)
+  console.log(profileJob.textContent)
+}
+
+
+formElement.addEventListener('submit', formSubmitHandler);
+

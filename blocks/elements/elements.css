@@ -7,6 +7,7 @@
   margin: 0 auto;
   justify-items: center;
   background-color: #000000;
+  overflow: hidden;
 }
 
 @media screen and (max-width:1023px) and (min-width:768px) {
