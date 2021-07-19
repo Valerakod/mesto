@@ -23,16 +23,19 @@ let jobInput = document.querySelector(".popup__text_check_job")
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
-  console.log(nameInput.value, jobInput.value)
 
+  let nameInput = document.querySelector(".popup__text_check_name")
+  let jobInput = document.querySelector(".popup__text_check_job")
+  let profileName = document.querySelector(".profile__name");
+  let profileJob = document.querySelector(".profile__job");
 
-  let profileName = document.getElementByld(".profile__name")
-  let profileJob = document.getElementById(".profile__job")
+  profileName.textContent = nameInput.value
+  profileJob.textContent = jobInput.value
 
-  console.log(profileName.textContent)
-  console.log(profileJob.textContent)
+  popupClose();
 }
 
 
-formElement.addEventListener('submit', formSubmitHandler);
 
+formElement.addEventListener('submit', formSubmitHandler);
+saveButton.addEventListener('click', formSubmitHandler)
