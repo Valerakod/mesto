@@ -14,6 +14,7 @@
   padding: 17px auto 18px;
   border: none;
   transition: 0.5s;
+  cursor: pointer;
 }
 
 .popup__save-button:hover {

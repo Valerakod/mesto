@@ -11,6 +11,7 @@
   background-color: transparent;
   justify-self: center;
   transition: 0.5s;
+  cursor: pointer;
 }
 
 .profile__edit-button:hover {
