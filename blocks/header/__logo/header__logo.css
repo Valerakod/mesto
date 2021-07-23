@@ -1,11 +1,15 @@
 .header__logo {
-margin-bottom: 41px;
-width: 142px;
-height: 33px;
-transition: 0.5s;
-cursor: pointer;
-color: #FFFFFF;
-z-index: 1;
+  display: block;
+  background-image: url("../../../images/logo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-bottom: 41px;
+  width: 142px;
+  height: 33px;
+  transition: 0.5s;
+  cursor: pointer;
+  color: #FFFFFF;
+  z-index: 1;
 }
 
 .header__logo:hover {
