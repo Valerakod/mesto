@@ -10,6 +10,8 @@
   background-position: center;
   transition: 0.5s;
   cursor: pointer;
+  box-sizing: border-box;
+  border-radius: 2px;
 }
 
 .profile__add-button:hover {

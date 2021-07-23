@@ -12,7 +12,7 @@
 
 <body class="page">
   <header class="header">
-    <img class="header__logo" src="./images/logo.svg" alt="Логотип">
+    <a class="header__logo" href="#"><img src="./images/logo.png" alt="Логотип"></a>
   </header>
 
   <main class="content">
@@ -20,47 +20,47 @@
       <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар">
       <div class="profile__info">
         <h1 class="profile__name">Валерия Емец</h1>
-        <button class="profile__edit-button">
+        <button class="profile__edit-button" type="button" aria-label="Редактировать профиль">
         </button>
         <p class="profile__job">Студентка Яндекс.Практикум</p>
       </div>
-      <button class="profile__add-button">
+      <button class="profile__add-button" type="button" aria-label="Добавить">
       </button>
 
 
     </section>
 
     <section class="elements">
-      <div class="element">
+      <article class="element">
         <img class="element__image" src="./images/karachevsk.jpg" alt="Карачaевск">
-        <p class="element__text">Карачaевск</p>
-        <img class="element__heart" src="./images/heart.png" alt="like">
-      </div>
-      <div class="element">
+        <h2 class="element__text">Карачaевск</h2>
+        <button class="element__heart" type="button" aria-label="Сердечко"></button>
+      </article>
+      <article class="element">
         <img class="element__image" src="./images/gora_elbrus.png" alt="Гора Эльбрус">
-        <p class="element__text">Гора Эльбрус</p>
-        <img class="element__heart" src="./images/heart.png" alt="like">
-      </div>
-      <div class="element">
+        <h2 class="element__text">Гора Эльбрус</h2>
+        <button class="element__heart" type="button" aria-label="Сердечко"></button>
+      </article>
+      <article class="element">
         <img class="element__image" src="./images/dombay.png" alt="Домбай">
-        <p class="element__text">Домбай</p>
-        <img class="element__heart" src="./images/heart.png" alt="like">
-      </div>
-      <div class="element">
+        <h2 class="element__text">Домбай</h2>
+        <button class="element__heart" type="button" aria-label="Сердечко"></button>
+      </article>
+      <article class="element">
         <img class="element__image" src="./images/gora_elbrus.png" alt="Гора Эльбрус">
-        <p class="element__text">Гора Эльбрус</p>
-        <img class="element__heart" src="./images/heart.png" alt="like">
-      </div>
-      <div class="element">
+        <h2 class="element__text">Гора Эльбрус</h2>
+        <button class="element__heart" type="button" aria-label="Сердечко"></button>
+      </article>
+      <article class="element">
         <img class="element__image" src="./images/dombay.png" alt="Домбай">
-        <p class="element__text">Домбай</p>
-        <img class="element__heart" src="./images/heart.png" alt="like">
-      </div>
-      <div class="element">
+        <h2 class="element__text">Домбай</h2>
+        <button class="element__heart" type="button" aria-label="Сердечко"></button>
+      </article>
+      <article class="element">
         <img class="element__image" src="./images/karachevsk.jpg" alt="Карачаево-Черкесия">
-        <p class="element__text">Карачаево-Черкесия</p>
-        <img class="element__heart" src="./images/heart.png" alt="like">
-      </div>
+        <h2 class="element__text">Карачаево-Черкесия</h2>
+        <button class="element__heart" type="button" aria-label="Сердечко"></button>
+      </article>
     </section>
   </main>
 
@@ -68,17 +68,17 @@
     <p class="footer__copyright">&copy; 2021. Валерия Емец</p>
   </footer>
 
-  <div class="popup">
+  <article class="popup">
     <div class="popup__container">
-      <form class="popup__form" method="post">
+      <form class="popup__form" method="post" name="form-element">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input class="popup__text popup__text_check_name" placeholder="Валерия Емец" type="text" required>
-        <input class="popup__text popup__text_check_job" placeholder="Студентка Яндекс.Практикум" type="text" required>
-        <button class="popup__save-button">Сохранить</button>
+        <input class="popup__text popup__text_check_name" placeholder="Валерия Емец" type="text" name="name-input" value="" required>
+        <input class="popup__text popup__text_check_job" placeholder="Студентка Яндекс.Практикум" type="text" name="job-input" value="" required>
+        <button class="popup__save-button" type="submit">Сохранить</button>
       </form>
-      <button class="popup__close-button"></button>
+      <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
     </div>
-  </div>
+  </article>
   <script src="./scripts/index.js"></script>
 </body>
 
