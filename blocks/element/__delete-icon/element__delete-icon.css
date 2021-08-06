@@ -1,4 +1,4 @@
-.element__delete {
+.element__delete-icon {
   background: url(../../../images/basket.svg);
   background-repeat: no-repeat;
   width: 18px;
@@ -10,7 +10,6 @@
   background-color: transparent;
   outline: none;
   margin: 0;
-  z-index: 1;
   position: absolute;
   top: 18px;
   right: 15px;

@@ -55,6 +55,14 @@ cardImage.addEventListener('click', openPopup3);
 closeButton.addEventListener('click', closePopup3);
 like.addEventListener('click', likeActive);
 
+let card = document.querySelector(".element");
+let deleteButton = document.querySelector(".element__delete-icon");
+
+function deleteCard() {
+card.classList.add("elemen_delete")
+}
+
+deleteButton.addEventListener("click", deleteCard)
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
