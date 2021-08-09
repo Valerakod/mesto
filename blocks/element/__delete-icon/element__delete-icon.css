@@ -14,8 +14,9 @@
   top: 18px;
   right: 15px;
   position: absolute;
+  transition: 0.5s;
 }
 
-.element__heart:hover {
+.element__delete-icon:hover {
   opacity: 0.6;
 }

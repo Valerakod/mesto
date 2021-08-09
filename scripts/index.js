@@ -16,13 +16,15 @@ const profileJob = document.querySelector(".profile__job");
 const addButton = document.querySelector(".profile__add-button");
 const placeNameInput = document.getElementById("popup-text-place-name");
 const placeSourceInput = document.getElementById("popup-text-place-source");
-
+const cardTemplate = document.getElementById("card").content;
+const elements = document.querySelector(".elements");
+const cards = document.querySelector(".element");
+const popupName = document.getElementById("popup-text-place-name");
+const popupLink = document.getElementById("popup-text-place-source");
 
 
 //открытие попапа
 function openPopup(popup) {
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
   popup.classList.add("popup_opened");
 }
 
@@ -31,24 +33,18 @@ function closePopup(popup) {
   popup.classList.remove("popup_opened");
 }
 
-
 //обработчик отправки формы для редактирования профиля
 function formSubmitHandler(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
   closePopup(popup1);
-  closePopup(popup2);
-
 }
 formElement.addEventListener("submit", formSubmitHandler);
 
-
-
-
 //клонирую и добавляю карточки
-const cardTemplate = document.getElementById("card").content;
-const elements = document.querySelector(".elements")
 
 const initialCards = [
   {
@@ -76,22 +72,6 @@ const initialCards = [
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg"
   }
 ];
-
-//function initCards(item) {
- // const newCard = cardTemplate.firstElementChild.cloneNode(true);
- // const elementText = newCard.querySelector(".element__text");
- // const cardImage = newCard.querySelector(".element__image");
- // elementText.textContent = item.name;
- // cardImage.src = item.link;
- // cardImage.alt = item.name;
- // elements.append(newCard);
-//}
-//initialCards.forEach(initCards);
-
-const cards = document.querySelector(".element");
-
-const popupName = document.getElementById("popup-text-place-name");
-const popupLink = document.getElementById("popup-text-place-source");
 
 //обработчик отправки формы для добавления карточек
 function cardFormSubmitHandler(evt) {
@@ -139,9 +119,6 @@ function deleteCards(event) {
 function likeActive(event) {
   event.target.classList.toggle("element__heart_active");
 }
-
-
-
 
 //обработчики событий
 editButton.addEventListener("click", () => openPopup(popup));
