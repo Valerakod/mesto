@@ -76,40 +76,19 @@ const initialCards = [
   }
 ];
 
-function initCards(item) {
-  const newCard = cardTemplate.firstElementChild.cloneNode(true);
-  const elementText = newCard.querySelector(".element__text");
-  const cardImage = newCard.querySelector(".element__image");
-  elementText.textContent = item.name;
-  cardImage.src = item.link;
-  cardImage.alt = item.name;
-  elements.append(newCard);
-}
-initialCards.forEach(initCards);
+//function initCards(item) {
+ // const newCard = cardTemplate.firstElementChild.cloneNode(true);
+ // const elementText = newCard.querySelector(".element__text");
+ // const cardImage = newCard.querySelector(".element__image");
+ // elementText.textContent = item.name;
+ // cardImage.src = item.link;
+ // cardImage.alt = item.name;
+ // elements.append(newCard);
+//}
+//initialCards.forEach(initCards);
 
 let cards = document.querySelector(".element");
 let deleteButton = document.querySelector(".element__delete-icon");
-
-//добавление новых карточек
-function addNewCard(card) {
-  const element = cardTemplate.querySelector(".element").cloneNode(true);
-  const myNewName = element.querySelector(".element__text");
-  const myNewImg = element.querySelector(".element__image");
-  myNewName.textContent = card.name;
-  myNewImg.src = card.link;
-  myNewImg.alt = card.name;
-  elements.prepend(element)
-}
-
-//открытие 3 попапа
-function openPicture(text, img) {
-  openPopup(popup3);
-  popup3.querySelector(".popup__text").textContent = text.textContent;
-  popup3.querySelector(".popup__image").alt = img.alt;
-  popup3.querySelector(".popup__image").src = img.src;
-
-
-}
 
 const popupName = document.getElementById("popup-text-place-name");
 const popupLink = document.getElementById("popup-text-place-source");
@@ -121,10 +100,32 @@ function cardFormSubmitHandler(evt) {
   addNewCard(myNewCard);
   // Очищаем поля формы
   formElementAdd.reset();
-
   closePopup(popup);
 }
 formElementAdd.addEventListener("submit", cardFormSubmitHandler);
+
+//добавление новых карточек
+function addNewCard(card) {
+  const element = cardTemplate.querySelector(".element").cloneNode(true);
+  const myNewName = element.querySelector(".element__text");
+  const myNewImg = element.querySelector(".element__image");
+  myNewName.textContent = card.name;
+  myNewImg.src = card.link;
+  myNewImg.alt = card.name;
+  myNewImg.addEventListener("click", () => openPicture(myNewName, myNewImg))
+  elements.prepend(element)
+}
+initialCards.forEach(card => {addNewCard(card)});
+
+
+//открытие 3 попапа
+function openPicture(text, img) {
+  openPopup(popup3);
+  popup3.querySelector(".popup__text").textContent = text.textContent;
+  popup3.querySelector(".popup__image").alt = img.alt;
+  popup3.querySelector(".popup__image").src = img.src;
+}
+
 
 //удаление карточки
 function deleteCards(event) {
@@ -146,5 +147,4 @@ editButton.addEventListener("click", () => openPopup(popup));
 closeButtonEdit.addEventListener("click", () => closePopup(popup1));
 addButton.addEventListener("click", () => openPopup(popup2));
 closeButtonAdd.addEventListener("click", () => closePopup(popup2));
-newCard.addEventListener("click", () => openPicture(elementText, cardImage))
 closeButtonImg.addEventListener("click", () => closePopup(popup3));
