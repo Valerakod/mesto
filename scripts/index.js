@@ -16,7 +16,7 @@ const profileJob = document.querySelector(".profile__job");
 const addButton = document.querySelector(".profile__add-button");
 const placeNameInput = document.getElementById("popup-text-place-name");
 const placeSourceInput = document.getElementById("popup-text-place-source");
-const like = document.querySelector(".element__heart");
+
 
 
 //открытие попапа
@@ -88,8 +88,7 @@ const initialCards = [
 //}
 //initialCards.forEach(initCards);
 
-let cards = document.querySelector(".element");
-let deleteButton = document.querySelector(".element__delete-icon");
+const cards = document.querySelector(".element");
 
 const popupName = document.getElementById("popup-text-place-name");
 const popupLink = document.getElementById("popup-text-place-source");
@@ -114,7 +113,9 @@ function addNewCard(card) {
   myNewImg.src = card.link;
   myNewImg.alt = card.name;
   myNewImg.addEventListener("click", () => openPicture(myNewName, myNewImg));
+  const like = element.querySelector(".element__heart");
   like.addEventListener("click", likeActive);
+  const deleteButton = element.querySelector(".element__delete-icon");
   deleteButton.addEventListener("click", deleteCards);
   elements.prepend(element);
 }
