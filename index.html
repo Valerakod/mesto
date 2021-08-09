@@ -29,42 +29,13 @@
     </section>
 
     <section class="elements">
-      <article class="element">
+      <template id="card"><article class="element">
         <img class="element__image" src="./images/karachevsk.jpg" alt="Карачaевск">
         <h2 class="element__text">Карачaевск</h2>
         <button class="element__heart" type="button" aria-label="Поставить лайк"></button>
         <button class="element__delete-icon" type="button" aria-label="Удалить"></button>
-      </article>
-      <article class="element">
-        <img class="element__image" src="./images/gora_elbrus.png" alt="Гора Эльбрус">
-        <h2 class="element__text">Гора Эльбрус</h2>
-        <button class="element__heart" type="button" aria-label="Поставить лайк"></button>
-        <button class="element__delete-icon" type="button" aria-label="Удалить"></button>
-      </article>
-      <article class="element">
-        <img class="element__image" src="./images/dombay.png" alt="Домбай">
-        <h2 class="element__text">Домбай</h2>
-        <button class="element__heart" type="button" aria-label="Поставить лайк"></button>
-        <button class="element__delete-icon" type="button" aria-label="Удалить"></button>
-      </article>
-      <article class="element">
-        <img class="element__image" src="./images/gora_elbrus.png" alt="Гора Эльбрус">
-        <h2 class="element__text">Гора Эльбрус</h2>
-        <button class="element__heart" type="button" aria-label="Поставить лайк"></button>
-        <button class="element__delete-icon" type="button" aria-label="Удалить"></button>
-      </article>
-      <article class="element">
-        <img class="element__image" src="./images/dombay.png" alt="Домбай">
-        <h2 class="element__text">Домбай</h2>
-        <button class="element__heart" type="button" aria-label="Поставить лайк"></button>
-        <button class="element__delete-icon" type="button" aria-label="Удалить"></button>
-      </article>
-      <article class="element">
-        <img class="element__image" src="./images/karachevsk.jpg" alt="Карачаево-Черкесия">
-        <h2 class="element__text">Карачаево-Черкесия</h2>
-        <button class="element__heart" type="button" aria-label="Поставить лайк"></button>
-        <button class="element__delete-icon" type="button" aria-label="Удалить"></button>
-      </article>
+      </article></template>
+
     </section>
   </main>
 
@@ -72,9 +43,9 @@
     <p class="footer__copyright">&copy; 2021. Валерия Емец</p>
   </footer>
 
-  <article class="popup" id="popup1">
+  <article class="popup">
     <div class="popup__container">
-      <form class="popup__form" method="post" name="form-element">
+      <form class="popup__form popup__form_profile" method="post" name="form-element">
         <h2 class="popup__title">Редактировать профиль</h2>
         <input class="popup__text" placeholder="Валерия Емец" type="text" name="name-input" value="" required
           id="popup-text-check-name">
@@ -86,9 +57,9 @@
     </div>
   </article>
 
-  <article class="popup" id="popup2">
+  <article class="popup popup-add">
     <div class="popup__container">
-      <form class="popup__form" method="post" name="form-element">
+      <form class="popup__form popup__form_add" method="post" name="form-element">
         <h2 class="popup__title">Новое место</h2>
         <input class="popup__text" placeholder="Название" type="text" name="placename-input" value="" required
           id="popup-text-place-name">
@@ -100,7 +71,7 @@
     </div>
   </article>
 
-  <article class="popup" id="popup3">
+  <article class="popup popup-img">
     <div class="popup__element">
       <figure class="figure">
         <img class="popup__element_image"
