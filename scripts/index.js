@@ -44,7 +44,7 @@ function formSubmitHandler(evt) {
 }
 formElement.addEventListener("submit", formSubmitHandler);
 
-//клонирую и добавляю карточки
+//массив какточек
 
 const initialCards = [
   {
@@ -84,7 +84,7 @@ function cardFormSubmitHandler(evt) {
 }
 formElementAdd.addEventListener("submit", cardFormSubmitHandler);
 
-//добавление новых карточек
+//клонирование и добавление новых карточек
 function addNewCard(card) {
   const element = cardTemplate.querySelector(".element").cloneNode(true);
   const myNewName = element.querySelector(".element__text");
@@ -99,7 +99,7 @@ function addNewCard(card) {
   deleteButton.addEventListener("click", deleteCards);
   elements.prepend(element);
 }
-initialCards.forEach(card => {addNewCard(card)});
+initialCards.forEach(card => { addNewCard(card) });
 
 
 //открытие 3 попапа
