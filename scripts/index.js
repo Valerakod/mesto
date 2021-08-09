@@ -16,6 +16,7 @@ const profileJob = document.querySelector(".profile__job");
 const addButton = document.querySelector(".profile__add-button");
 const placeNameInput = document.getElementById("popup-text-place-name");
 const placeSourceInput = document.getElementById("popup-text-place-source");
+const like = document.querySelector(".element__heart");
 
 
 //открытие попапа
@@ -112,8 +113,10 @@ function addNewCard(card) {
   myNewName.textContent = card.name;
   myNewImg.src = card.link;
   myNewImg.alt = card.name;
-  myNewImg.addEventListener("click", () => openPicture(myNewName, myNewImg))
-  elements.prepend(element)
+  myNewImg.addEventListener("click", () => openPicture(myNewName, myNewImg));
+  like.addEventListener("click", likeActive);
+  deleteButton.addEventListener("click", deleteCards);
+  elements.prepend(element);
 }
 initialCards.forEach(card => {addNewCard(card)});
 
@@ -121,24 +124,21 @@ initialCards.forEach(card => {addNewCard(card)});
 //открытие 3 попапа
 function openPicture(text, img) {
   openPopup(popup3);
-  popup3.querySelector(".popup__text").textContent = text.textContent;
-  popup3.querySelector(".popup__image").alt = img.alt;
-  popup3.querySelector(".popup__image").src = img.src;
+  popup3.querySelector(".popup__element_text").textContent = text.textContent;
+  popup3.querySelector(".popup__element_image").alt = img.alt;
+  popup3.querySelector(".popup__element_image").src = img.src;
 }
-
 
 //удаление карточки
 function deleteCards(event) {
   event.target.closest(".element").remove();
 }
-deleteButton.addEventListener("click", deleteCards)
 
 //лайк
-const like = document.querySelector(".element__heart");
 function likeActive(event) {
   event.target.classList.toggle("element__heart_active");
 }
-like.addEventListener("click", likeActive);
+
 
 
 
