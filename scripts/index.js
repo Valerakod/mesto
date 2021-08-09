@@ -22,7 +22,6 @@ const cards = document.querySelector(".element");
 const popupName = document.getElementById("popup-text-place-name");
 const popupLink = document.getElementById("popup-text-place-source");
 
-
 //открытие попапа
 function openPopup(popup) {
   popup.classList.add("popup_opened");
@@ -105,9 +104,9 @@ initialCards.forEach(card => { addNewCard(card) });
 //открытие 3 попапа
 function openPicture(text, img) {
   openPopup(popup3);
-  popup3.querySelector(".popup__element_text").textContent = text.textContent;
-  popup3.querySelector(".popup__element_image").alt = img.alt;
-  popup3.querySelector(".popup__element_image").src = img.src;
+  popup3.querySelector(".popup__element-text").textContent = text.textContent;
+  popup3.querySelector(".popup__element-image").alt = img.alt;
+  popup3.querySelector(".popup__element-image").src = img.src;
 }
 
 //удаление карточки
