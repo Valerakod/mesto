@@ -45,13 +45,13 @@
     <p class="footer__copyright">&copy; 2021. Валерия Емец</p>
   </footer>
 
-  <article class="popup" id="popup1">
+  <article class="popup popup-edit">
     <div class="popup__container">
       <form class="popup__form popup__form_profile" method="post" name="form-element">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input class="popup__text" placeholder="Валерия Емец" type="text" name="name-input" value="" required
+        <input class="popup__text" placeholder="Имя" type="text" name="name-input" value="" required
           id="popup-text-check-name">
-        <input class="popup__text" placeholder="Студентка Яндекс.Практикум" type="text" name="job-input" value=""
+        <input class="popup__text" placeholder="Профессиональная деятельность" type="text" name="job-input" value=""
           required id="popup-text-check-job">
         <button class="popup__save-button" type="submit">Сохранить</button>
       </form>
@@ -59,13 +59,13 @@
     </div>
   </article>
 
-  <article class="popup" id="popup2">
+  <article class="popup popup-add">
     <div class="popup__container">
       <form class="popup__form popup__form_add" method="post" name="form-element">
         <h2 class="popup__title">Новое место</h2>
         <input class="popup__text" placeholder="Название" type="text" name="placename-input" value="" required
           id="popup-text-place-name">
-        <input class="popup__text" placeholder="Ссылка на картинку" type="text" name="source-input" value="" required
+        <input class="popup__text" placeholder="Ссылка на картинку" type="url" name="source-input" value="" required
           id="popup-text-place-source">
         <button class="popup__save-button" type="submit">Создать</button>
       </form>
@@ -73,7 +73,7 @@
     </div>
   </article>
 
-  <article class="popup" id="popup3">
+  <article class="popup popup-img">
     <div class="popup__element">
       <figure class="figure">
         <img class="popup__element-image"

@@ -1,8 +1,8 @@
 const editButton = document.querySelector(".profile__edit-button");
 const popup = document.querySelector(".popup");
-const popup1 = document.getElementById("popup1");
-const popup2 = document.getElementById("popup2");
-const popup3 = document.getElementById("popup3");
+const popupEdit = document.querySelector(".popup-edit");
+const popupAdd = document.querySelector(".popup-add");
+const popupImg = document.querySelector(".popup-img");
 const saveButton = document.querySelector(".popup__save-button");
 const closeButtonEdit = document.querySelector(".popup__close-button_edit");
 const closeButtonAdd = document.querySelector(".popup__close-button_add");
@@ -39,9 +39,27 @@ function formSubmitHandler(evt) {
   profileJob.textContent = jobInput.value;
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-  closePopup(popup1);
+  closePopup(popupEdit);
 }
 formElement.addEventListener("submit", formSubmitHandler);
+
+//открытие 3 попапа
+function openPicture(text, img) {
+  openPopup(popupImg);
+  popupImg.querySelector(".popup__element-text").textContent = text.textContent;
+  popupImg.querySelector(".popup__element-image").alt = img.alt;
+  popupImg.querySelector(".popup__element-image").src = img.src;
+}
+
+//удаление карточки
+function deleteCards(event) {
+  event.target.closest(".element").remove();
+}
+
+//лайк
+function likeActive(event) {
+  event.target.classList.toggle("element__heart_active");
+}
 
 //массив какточек
 
@@ -101,27 +119,9 @@ function addNewCard(card) {
 initialCards.forEach(card => { addNewCard(card) });
 
 
-//открытие 3 попапа
-function openPicture(text, img) {
-  openPopup(popup3);
-  popup3.querySelector(".popup__element-text").textContent = text.textContent;
-  popup3.querySelector(".popup__element-image").alt = img.alt;
-  popup3.querySelector(".popup__element-image").src = img.src;
-}
-
-//удаление карточки
-function deleteCards(event) {
-  event.target.closest(".element").remove();
-}
-
-//лайк
-function likeActive(event) {
-  event.target.classList.toggle("element__heart_active");
-}
-
 //обработчики событий
 editButton.addEventListener("click", () => openPopup(popup));
-closeButtonEdit.addEventListener("click", () => closePopup(popup1));
-addButton.addEventListener("click", () => openPopup(popup2));
-closeButtonAdd.addEventListener("click", () => closePopup(popup2));
-closeButtonImg.addEventListener("click", () => closePopup(popup3));
+closeButtonEdit.addEventListener("click", () => closePopup(popupEdit));
+addButton.addEventListener("click", () => openPopup(popupAdd));
+closeButtonAdd.addEventListener("click", () => closePopup(popupAdd));
+closeButtonImg.addEventListener("click", () => closePopup(popupImg));
