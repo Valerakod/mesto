@@ -126,9 +126,9 @@ initialCards.forEach(card => { addNewCard(card) });
 
 //обработчики событий
 editButton.addEventListener("click", () => {
-  openPopup(popupEdit);
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
+  openPopup(popupEdit);
   }
 );
 closeButtonEdit.addEventListener("click", () => closePopup(popupEdit));
