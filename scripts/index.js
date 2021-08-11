@@ -37,10 +37,8 @@ function closePopup(popup) {
 //обработчик отправки формы для редактирования профиля
 function formSubmitHandler(evt) {
   evt.preventDefault();
-  profileName = nameInput.value;
-  profileJob = jobInput.value;
-  nameInput.textContent = profileName;
-  jobInput.textContent = profileJob;
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
   closePopup(popupEdit);
 }
 formElement.addEventListener("submit", formSubmitHandler);
@@ -120,15 +118,20 @@ function createCard(card) {
 }
 
 //функция добавления карточки в контейнер
-  function addNewCard(card) {
-    elements.prepend(createCard(card));
+function addNewCard(card) {
+  elements.prepend(createCard(card));
+}
+initialCards.forEach(card => { addNewCard(card) });
+
+
+//обработчики событий
+editButton.addEventListener("click", () => {
+  openPopup(popupEdit);
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
   }
-  initialCards.forEach(card => { addNewCard(card) });
-
-
-  //обработчики событий
-  editButton.addEventListener("click", () => openPopup(popup));
-  closeButtonEdit.addEventListener("click", () => closePopup(popupEdit));
-  addButton.addEventListener("click", () => openPopup(popupAdd));
-  closeButtonAdd.addEventListener("click", () => closePopup(popupAdd));
-  closeButtonImg.addEventListener("click", () => closePopup(popupImg));
+);
+closeButtonEdit.addEventListener("click", () => closePopup(popupEdit));
+addButton.addEventListener("click", () => openPopup(popupAdd));
+closeButtonAdd.addEventListener("click", () => closePopup(popupAdd));
+closeButtonImg.addEventListener("click", () => closePopup(popupImg));
