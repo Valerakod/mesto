@@ -97,7 +97,7 @@ function cardFormSubmitHandler(evt) {
   addNewCard(myNewCard);
   // Очищаем поля формы
   formElementAdd.reset();
-  closePopup(popup);
+  closePopup(popupAdd);
 }
 formElementAdd.addEventListener("submit", cardFormSubmitHandler);
 
