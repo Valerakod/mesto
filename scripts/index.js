@@ -7,7 +7,7 @@ const saveButton = document.querySelector(".popup__save-button");
 const closeButtonEdit = document.querySelector(".popup__close-button_edit");
 const closeButtonAdd = document.querySelector(".popup__close-button_add");
 const closeButtonImg = document.querySelector(".popup__close-button_img");
-const formElement = document.querySelector(".popup__form_profile");
+const formElementEdit = document.querySelector(".popup__form_profile");
 const formElementAdd = document.querySelector(".popup__form_add");
 const nameInput = document.getElementById("popup-text-check-name");
 const jobInput = document.getElementById("popup-text-check-job");
@@ -27,11 +27,31 @@ const cardImage = popupImg.querySelector(".popup__element-image");
 //открытие попапа
 function openPopup(popup) {
   popup.classList.add("popup_opened");
+  document.addEventListener("keydown", closePopupClickEsc);
+  popup.addEventListener("mousedown", closePopupClickOverlay);
 }
 
 //закрытие попапа
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", closePopupClickEsc);
+  popup.removeEventListener("mousedown", closePopupClickOverlay);
+}
+
+//закрытие попапа кликом на оверлей
+function closePopupClickOverlay(e) {
+  const popupOpened = document.querySelector(".popup_opened")
+  if (e.target === popupOpened) {
+    closePopup(popupOpened)
+  }
+}
+
+//закрытие попапа кликом на ESC
+function closePopupClickEsc(e) {
+  if (e.key === "Escape") {
+    const popupOpened = document.querySelector(".popup_opened")
+    closePopup(popupOpened)
+  }
 }
 
 //обработчик отправки формы для редактирования профиля
@@ -41,7 +61,7 @@ function formSubmitHandler(evt) {
   profileJob.textContent = jobInput.value;
   closePopup(popupEdit);
 }
-formElement.addEventListener("submit", formSubmitHandler);
+formElementEdit.addEventListener("submit", formSubmitHandler);
 
 //открытие 3 попапа
 function openPicture(text, img) {
@@ -129,7 +149,7 @@ editButton.addEventListener("click", () => {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   openPopup(popupEdit);
-  }
+}
 );
 closeButtonEdit.addEventListener("click", () => closePopup(popupEdit));
 addButton.addEventListener("click", () => openPopup(popupAdd));
