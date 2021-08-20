@@ -1,14 +1,14 @@
 // Функция, которая добавляет класс с ошибкой
 const showInputError = (formElement, inputElement, errorMessage) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  const errorElement = formElement.querySelector(`.${inputElement.name}-error`);
   inputElement.classList.add("popup__input_type_error");
-  errorElement.textContent = errorMessage;
   errorElement.classList.add("popup__input-error_active");
+  errorElement.textContent = errorMessage;
 };
 
 // Функция, которая удаляет класс с ошибкой
 const hideInputError = (formElement, inputElement) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  const errorElement = formElement.querySelector(`.${inputElement.name}-error`);
   inputElement.classList.remove("popup__input_type_error");
   errorElement.classList.remove("popup__input-error_active");
   errorElement.textContent = " ";
@@ -58,6 +58,7 @@ const setEventListeners = (formElement) => {
 const enableValidation = () => {
   const formList = Array.from(document.querySelectorAll(".popup__form"));
   formList.forEach((formElement) => {
+    setEventListeners(formElement);
     formElement.addEventListener("submit", function (evt) {
       // Отменим стандартное поведение по сабмиту
       evt.preventDefault();
