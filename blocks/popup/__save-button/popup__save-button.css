@@ -10,7 +10,7 @@
   line-height: 22px;
   color: #FFFFFF;
   justify-content: center;
-  margin: 22px 0 0 37px;
+  margin: 12px 0 0 37px;
   padding: 17px auto 18px;
   border: none;
   transition: 0.5s;
@@ -27,6 +27,6 @@
     height: 46px;
     font-size: 14px;
     line-height: 17px;
-    margin: 19px 0 0 21px;
+    margin: 12px 0 0 21px;
   }
 }

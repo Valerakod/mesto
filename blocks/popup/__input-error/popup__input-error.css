@@ -6,5 +6,11 @@
   font-size: 12px;
   line-height: 15px;
   color: #FF0000;
-  padding-top: 5px;
+  margin: 0 0 0 35px;
+}
+
+@media (max-width: 767px) and (min-width: 320px) {
+  .popup__input-error {
+    margin: 0 0 0 21px;
+  }
 }
