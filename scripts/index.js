@@ -40,9 +40,8 @@ function closePopup(popup) {
 
 //закрытие попапа кликом на оверлей
 function closePopupClickOverlay(e) {
-  const popupOpened = document.querySelector(".popup_opened")
-  if (e.target === popupOpened) {
-    closePopup(popupOpened)
+  if (e.target === e.currentTarget) {
+    closePopup(e.currentTarget)
   }
 }
 
@@ -72,7 +71,7 @@ function openPicture(text, img) {
 }
 
 //удаление карточки
-function deleteCards(event) {
+function deleteCard(event) {
   event.target.closest(".element").remove();
 }
 
@@ -81,34 +80,6 @@ function likeActive(event) {
   event.target.classList.toggle("element__heart_active");
 }
 
-//массив карточек
-
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg"
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg"
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg"
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg"
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg"
-  }
-];
 
 //обработчик отправки формы для добавления карточек
 function cardFormSubmitHandler(evt) {
@@ -133,7 +104,7 @@ function createCard(card) {
   const like = element.querySelector(".element__heart");
   like.addEventListener("click", likeActive);
   const deleteButton = element.querySelector(".element__delete-icon");
-  deleteButton.addEventListener("click", deleteCards);
+  deleteButton.addEventListener("click", deleteCard);
   return element; //возвращается созданная карточка
 }
 
