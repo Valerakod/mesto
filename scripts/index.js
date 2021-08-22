@@ -88,8 +88,12 @@ function cardFormSubmitHandler(evt) {
   addNewCard(myNewCard);
   // Очищаем поля формы
   formElementAdd.reset();
+  const saveButtonPopupAdd = popupAdd.querySelector(".popup__save-button");
+  saveButtonPopupAdd.setAttribute("disabled", true);
+  saveButtonPopupAdd.classList.add("popup__save-button_inactive");
   closePopup(popupAdd);
 }
+
 formElementAdd.addEventListener("submit", cardFormSubmitHandler);
 
 //функция создания новых карточек
