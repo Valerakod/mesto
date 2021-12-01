@@ -60,7 +60,7 @@ _setEventListeners () {
 };
 
 //находим и перебираем все формы на странице
-enableValidation {
+enableValidation () {
   const formList = Array.from(document.querySelectorAll(elements.formSelector));
   formList.forEach((formElement) => {
     setEventListeners(formElement, elements);
@@ -70,5 +70,5 @@ enableValidation {
     });
   });
   this._setEventListeners();
-};
-
+}
+}

@@ -1,9 +1,9 @@
 import { openPicture } from "./index.js";
 
 export class Card {
-  constructor(link, title, templateSelector) {
-    this.title = title;
-    this.link = link;
+  constructor(title, link, templateSelector) {
+    this._title = title;
+    this._link = link;
     this._templateSelector = templateSelector;
   };
 
@@ -25,19 +25,19 @@ export class Card {
   };
 
   _setEventListners() {
-    this.element.querySelector(".element__delete-icon").addEventListener("click", this._deleteCard);
-    this.element.querySelector(".element__heart").addEventListener("click", this._likeActive);
-    this.element.querySelector(".element__image").addEventListener("click", openPicture);
+    this._element.querySelector(".element__delete-icon").addEventListener("click", this._deleteCard);
+    this._element.querySelector(".element__heart").addEventListener("click", this._likeActive);
+    this._element.querySelector(".element__image").addEventListener("click", openPicture);
   };
 
   generateCard() {
-    this.element = this._getTemplate();
+    this._element = this._getTemplate();
 
-    const cardElementImage = this.element.querySelector(".element__image");
-    const cardElementTitle = this.element.querySelector(".element__text");
-    cardElementImage.setAttribute("src", this.link);
-    cardElementImage.setAttribute("alt", this.title);
-    cardElementTitle.textContent = this.title;
+    const cardElementImage = this._element.querySelector(".element__image");
+    const cardElementTitle = this._element.querySelector(".element__text");
+    cardElementImage.setAttribute("src", this._link);
+    cardElementImage.setAttribute("alt", this._title);
+    cardElementTitle.textContent = this._title;
 
     this._setEventListners();
 

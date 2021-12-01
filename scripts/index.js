@@ -96,8 +96,9 @@ function cardFormSubmitHandler(evt) {
 formElementAdd.addEventListener("submit", cardFormSubmitHandler);
 
 //функция создания новых карточек
-function createCard(link, title) {
-  return (new Card(link, title, "#card")).generateCard();
+function createCard(card) {
+  const card = {title, link}
+  return (new Card(card, "#card")).generateCard();
 }
 
 //функция добавления карточки в контейнер
