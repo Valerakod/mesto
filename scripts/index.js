@@ -23,7 +23,7 @@ const cardName = popupImg.querySelector(".popup__element-text");
 const cardImage = popupImg.querySelector(".popup__element-image");
 
 //вызов валидации
-const config = {
+const selectors = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__save-button",
