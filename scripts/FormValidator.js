@@ -61,14 +61,6 @@ _setEventListeners () {
 
 //находим и перебираем все формы на странице
 enableValidation () {
-  const formList = Array.from(document.querySelectorAll(elements.formSelector));
-  formList.forEach((formElement) => {
-    this._setEventListeners(formElement, elements);
-    this._formElement.addEventListener("submit", function (evt) {
-       //Отменим стандартное поведение по сабмиту
-      evt.preventDefault();
-    });
-  });
   this._setEventListeners();
 }
 }
