@@ -72,18 +72,18 @@ function formSubmitHandler(evt) {
 formElementEdit.addEventListener("submit", formSubmitHandler);
 
 //открытие 3 попапа
-function openPicture(text, img) {
+function openPicture(title, link) {
+  cardName.textContent = title;
+  cardImage.alt = title;
+  cardImage.src = link;
   openPopup(popupImg);
-  cardName.textContent = text.textContent;
-  cardImage.alt = img.alt;
-  cardImage.src = img.src;
 }
 
 
 //обработчик отправки формы для добавления карточек
 function cardFormSubmitHandler(evt) {
   evt.preventDefault();
-  const myNewCard = { name: popupName.value, link: popupLink.value };
+  const myNewCard = { title: popupName.value, link: popupLink.value };
   addNewCard(myNewCard);
   // Очищаем поля формы
   formElementAdd.reset();
@@ -116,8 +116,18 @@ editButton.addEventListener("click", () => {
 }
 );
 closeButtonEdit.addEventListener("click", () => closePopup(popupEdit));
-addButton.addEventListener("click", () => { openPopup(popupAdd), hideInputError(formElement, inputElement), formElementAdd.reset() });
+addButton.addEventListener("click", () => { openPopup(popupAdd), formAddCardValidator.enableValidation(), formElementAdd.reset() });
 closeButtonAdd.addEventListener("click", () => closePopup(popupAdd));
 closeButtonImg.addEventListener("click", () => closePopup(popupImg));
+
+//для каждой формы включаю экземпляр валидатора и включаю валидацию.
+const formEditProfile = document.querySelector(".popup-edit");
+const formEditProfileValidator = new FormValidator(selectors, formEditProfile);
+formEditProfileValidator.enableValidation();
+
+const formAddCard = document.querySelector(".popup-add");
+const formAddCardValidator = new FormValidator(selectors, formAddCard);
+formAddCardValidator.enableValidation();
+
 
 export { openPicture };

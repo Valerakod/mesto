@@ -37,20 +37,20 @@ _hasInvalidInput(inputList) {
 
 //функция изменения состояния кнопки
 _toggleButtonState(inputList) {
-  const saveButtonPopupAdd = this._formElement.querySelector(this._selectors.submitButtonSelector);
+  const saveButton = this._formElement.querySelector(this._selectors.submitButtonSelector);
   if (this._hasInvalidInput(inputList)) {
-    saveButtonPopupAdd.classList.add(this._selectors.inactiveButtonClass);
-    saveButtonPopupAdd.setAttribute("disabled", true);
+    saveButton.classList.add(this._selectors.inactiveButtonClass);
+    saveButton.setAttribute("disabled", true);
   } else {
-    saveButtonPopupAdd.classList.remove(this._selectors.inactiveButtonClass);
-    saveButtonPopupAdd.removeAttribute("disabled");
+    saveButton.classList.remove(this._selectors.inactiveButtonClass);
+    saveButton.removeAttribute("disabled");
   }
 };
 
 //функция добавляет обработчики сразу всем полям формы
 _setEventListeners () {
   const inputList = Array.from(this._formElement.querySelectorAll(this._selectors.inputSelector));
-  this._toggleButtonState(inputList, saveButtonPopupAdd, elements);
+  this._toggleButtonState(inputList, saveButton, elements);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", function () {
       this._checkInputValidity(inputElement);
@@ -63,12 +63,13 @@ _setEventListeners () {
 enableValidation () {
   const formList = Array.from(document.querySelectorAll(elements.formSelector));
   formList.forEach((formElement) => {
-    setEventListeners(formElement, elements);
-    formElement.addEventListener("submit", function (evt) {
-      // Отменим стандартное поведение по сабмиту
+    this._setEventListeners(formElement, elements);
+    this._formElement.addEventListener("submit", function (evt) {
+       //Отменим стандартное поведение по сабмиту
       evt.preventDefault();
     });
   });
   this._setEventListeners();
 }
 }
+
