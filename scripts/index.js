@@ -96,14 +96,14 @@ function cardFormSubmitHandler(evt) {
 formElementAdd.addEventListener("submit", cardFormSubmitHandler);
 
 //функция создания новых карточек
-function createCard(card) {
-  const card = {title, link}
-  return (new Card(card, "#card")).generateCard();
+function createCard(title, link) {
+
+  return (new Card (title, link, "#card")).generateCard();
 }
 
 //функция добавления карточки в контейнер
 function addNewCard(card) {
-  elements.prepend(createCard(card));
+  elements.prepend(createCard(card.title, card.link));
 }
 initialCards.forEach(card => { addNewCard(card) });
 

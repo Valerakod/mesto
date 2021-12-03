@@ -37,20 +37,20 @@ _hasInvalidInput(inputList) {
 
 //функция изменения состояния кнопки
 _toggleButtonState(inputList) {
-  const saveButton = this._formElement.querySelector(this._selectors.submitButtonSelector);
+  const saveButtonPopupAdd = this._formElement.querySelector(this._selectors.submitButtonSelector);
   if (this._hasInvalidInput(inputList)) {
-    saveButton.classList.add(this._selectors.inactiveButtonClass);
-    saveButton.setAttribute("disabled", true);
+    saveButtonPopupAdd.classList.add(this._selectors.inactiveButtonClass);
+    saveButtonPopupAdd.setAttribute("disabled", true);
   } else {
-    saveButton.classList.remove(this._selectors.inactiveButtonClass);
-    saveButton.removeAttribute("disabled");
+    saveButtonPopupAdd.classList.remove(this._selectors.inactiveButtonClass);
+    saveButtonPopupAdd.removeAttribute("disabled");
   }
 };
 
 //функция добавляет обработчики сразу всем полям формы
 _setEventListeners () {
   const inputList = Array.from(this._formElement.querySelectorAll(this._selectors.inputSelector));
-  this._toggleButtonState(inputList, saveButton, elements);
+  this._toggleButtonState(inputList, saveButtonPopupAdd, elements);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", function () {
       this._checkInputValidity(inputElement);
