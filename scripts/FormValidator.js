@@ -52,7 +52,7 @@ _setEventListeners () {
   const inputList = Array.from(this._formElement.querySelectorAll(this._selectors.inputSelector));
   this._toggleButtonState(inputList);
   inputList.forEach((inputElement) => {
-    inputElement.addEventListener("input", function () {
+    inputElement.addEventListener("input", () => {
       this._checkInputValidity(inputElement);
       this._toggleButtonState(inputList);
     });
