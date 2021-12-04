@@ -50,7 +50,7 @@ _toggleButtonState(inputList) {
 //функция добавляет обработчики сразу всем полям формы
 _setEventListeners () {
   const inputList = Array.from(this._formElement.querySelectorAll(this._selectors.inputSelector));
-  this._toggleButtonState(inputList, saveButton, elements);
+  this._toggleButtonState(inputList);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", function () {
       this._checkInputValidity(inputElement);

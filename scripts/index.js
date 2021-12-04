@@ -116,7 +116,7 @@ editButton.addEventListener("click", () => {
 }
 );
 closeButtonEdit.addEventListener("click", () => closePopup(popupEdit));
-addButton.addEventListener("click", () => { openPopup(popupAdd), formAddCardValidator.enableValidation(), formElementAdd.reset() });
+addButton.addEventListener("click", () => { openPopup(popupAdd), formElementAdd.reset() });
 closeButtonAdd.addEventListener("click", () => closePopup(popupAdd));
 closeButtonImg.addEventListener("click", () => closePopup(popupImg));
 
