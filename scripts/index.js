@@ -21,6 +21,7 @@ const popupName = document.getElementById("popup-text-place-name");
 const popupLink = document.getElementById("popup-text-place-source");
 const cardName = popupImg.querySelector(".popup__element-text");
 const cardImage = popupImg.querySelector(".popup__element-image");
+const saveButtonPopupAdd = document.querySelector(".popup__save-button");
 
 //вызов валидации
 const selectors = {
@@ -34,10 +35,12 @@ const selectors = {
 
 //открытие попапа
 function openPopup(popup) {
-  popup.classList.add("popup_opened");
   formElementAdd.reset();
+  popup.classList.add("popup_opened");
   document.addEventListener("keydown", closePopupClickEsc);
   popup.addEventListener("mousedown", closePopupClickOverlay);
+  formEditProfileValidator.restartFormValidation();
+  formAddCardValidator.restartFormValidation();
 }
 
 //закрытие попапа
@@ -63,13 +66,13 @@ function closePopupClickEsc(e) {
 }
 
 //обработчик отправки формы для редактирования профиля
-function formSubmitHandler(evt) {
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
   closePopup(popupEdit);
 }
-formElementEdit.addEventListener("submit", formSubmitHandler);
+formElementEdit.addEventListener("submit", handleProfileFormSubmit);
 
 //открытие 3 попапа
 function openPicture(title, link) {
@@ -81,24 +84,22 @@ function openPicture(title, link) {
 
 
 //обработчик отправки формы для добавления карточек
-function cardFormSubmitHandler(evt) {
+function handleCardFormSubmit(evt) {
   evt.preventDefault();
   const myNewCard = { title: popupName.value, link: popupLink.value };
   addNewCard(myNewCard);
   // Очищаем поля формы
-  formElementAdd.reset();
-  const saveButtonPopupAdd = popupAdd.querySelector(".popup__save-button");
-  saveButtonPopupAdd.setAttribute("disabled", true);
-  saveButtonPopupAdd.classList.add("popup__save-button_inactive");
   closePopup(popupAdd);
+  blockSubmitButton();
+  formElementAdd.reset();
 }
 
-formElementAdd.addEventListener("submit", cardFormSubmitHandler);
+formElementAdd.addEventListener("submit", handleCardFormSubmit);
 
 //функция создания новых карточек
 function createCard(title, link) {
 
-  return (new Card (title, link, "#card")).generateCard();
+  return (new Card(title, link, "#card")).generateCard();
 }
 
 //функция добавления карточки в контейнер

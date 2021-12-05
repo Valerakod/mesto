@@ -10,13 +10,13 @@ export class Card {
   _getTemplate() {
     const elementTemplate = document.querySelector(this._templateSelector);
     const cardElement = elementTemplate.content.firstElementChild.cloneNode(true);
-
     return cardElement;
   };
 
   //удаление карточки
-  _deleteCard(event) {
-    event.target.closest(".element").remove();
+  _deleteCard = () => {
+    this._element.remove();
+    this._element = null;
   };
 
   //лайк
@@ -27,7 +27,7 @@ export class Card {
   _setEventListners() {
     this._element.querySelector(".element__delete-icon").addEventListener("click", this._deleteCard);
     this._element.querySelector(".element__heart").addEventListener("click", this._likeActive);
-    this._element.querySelector(".element__image").addEventListener("click", () => { openPicture(this._title, this._link)});
+    this._element.querySelector(".element__image").addEventListener("click", () => { openPicture(this._title, this._link) });
   };
 
   generateCard() {
