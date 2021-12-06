@@ -90,7 +90,6 @@ function handleCardFormSubmit(evt) {
   addNewCard(myNewCard);
   // Очищаем поля формы
   closePopup(popupAdd);
-  blockSubmitButton();
   formElementAdd.reset();
 }
 

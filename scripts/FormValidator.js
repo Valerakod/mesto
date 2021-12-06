@@ -47,12 +47,6 @@ export class FormValidator {
     }
   };
 
-  //блокировка кнопки
-  blockSubmitButton() {
-    this._submitButton.classList.add(this._selectors.inactiveButtonClass);
-    this._submitButton.disabled = true;
-  }
-
   //функция добавляет обработчики сразу всем полям формы
   _setEventListeners() {
     const inputList = Array.from(this._formElement.querySelectorAll(this._selectors.inputSelector));
