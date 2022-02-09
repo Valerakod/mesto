@@ -1,4 +1,4 @@
-import { openPicture } from "./index.js";
+import { openPicture } from "../index.js";
 
 export class Card {
   constructor(title, link, templateSelector) {
@@ -43,5 +43,4 @@ export class Card {
 
     return this._element;
   };
-
 }

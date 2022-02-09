@@ -1,6 +1,10 @@
-import { Card } from "./Card.js";
-import { initialCards } from "./initial-cards.js";
-import { FormValidator } from "./FormValidator.js";
+import "../pages/index.css"
+import { Card } from "../components/Card.js";
+import { initialCards } from "../components/initial-cards.js";
+import { FormValidator } from "../components/FormValidator.js";
+import { Section } from "../components/Section.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
+
 
 const editButton = document.querySelector(".profile__edit-button");
 const popupEdit = document.querySelector(".popup-edit");
@@ -95,17 +99,36 @@ function handleCardFormSubmit(evt) {
 
 formElementAdd.addEventListener("submit", handleCardFormSubmit);
 
+const popupOpenImage = new PopupWithImage(openPicture);
+
+function handleCardClick(link, name) {
+  popupOpenImage.open(link, name);
+}
+popupOpenImage.setEventListeners();
+
+//инициализируем класс, ответственный за добавление формы на страницу
+const cardList = new Section(
+  {
+    data: initialCards,
+    renderer: (item) => addNewCard(item),
+  },
+  elements
+);
+cardList.renderItems();
+
 //функция создания новых карточек
 function createCard(title, link) {
-
-  return (new Card(title, link, "#card")).generateCard();
+  const card = new Card(title, link, "#card", handleCardClick);
+  const cardElement = card.generateCard();
+  return cardElement;
 }
 
 //функция добавления карточки в контейнер
 function addNewCard(card) {
+  const newCard = newPopupWithForm
   elements.prepend(createCard(card.title, card.link));
 }
-initialCards.forEach(card => { addNewCard(card) });
+//initialCards.forEach(card => { addNewCard(card) });
 
 
 //обработчики событий
@@ -131,3 +154,4 @@ formAddCardValidator.enableValidation();
 
 
 export { openPicture };
+
