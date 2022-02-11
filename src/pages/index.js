@@ -1,11 +1,11 @@
 import "./index.css"
-import { Card } from "../components/Card.js";
-import { initialCards } from "../components/initial-cards.js";
-import { FormValidator } from "../components/FormValidator.js";
-import { Section } from "../components/Section.js";
-import { PopupWithImage } from "../components/PopupWithImage.js";
-import { PopupWithForm } from "../components/PopupWithForm.js";
-import { UserInfo } from "../components/UserInfo.js";
+import Card from "../components/Card.js";
+import initialCards from "../components/initial-cards.js";
+import FormValidator from "../components/FormValidator.js";
+import Section from "../components/Section.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
 
 
 const editButton = document.querySelector(".profile__edit-button");
@@ -51,8 +51,6 @@ formElementEdit.addEventListener("submit", handleProfileFormSubmit);
 //обработчик отправки формы для добавления карточек
 function handleCardFormSubmit(evt) {
   evt.preventDefault();
-  const myNewCard = { title: popupName.value, link: popupLink.value };
-  addNewCard(myNewCard);
   // Очищаем поля формы
   newCard.close();
   formElementAdd.reset();
@@ -85,7 +83,7 @@ const cardList = new Section(
     data: initialCards,
     renderer: (item) => createCard(item),
   },
-  elements
+  ".element"
 );
 cardList.renderItems();
 
@@ -96,8 +94,7 @@ const newCard = new PopupWithForm(popupAdd, {
     newCard.reset();
     cardList.addItem(cardElement(element));
   }
-    newCard.close()
-}
+})
 newCard.setEventListeners();
 
 //форма редактирования профиля
@@ -107,7 +104,6 @@ const newProfile = new PopupWithForm(formElementEdit, {
       name: data.name,
       about: data.about
     })
-newProfile.close()
 })
 
 //обработчик события при редактировании профиля

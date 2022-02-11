@@ -1,6 +1,4 @@
-import { openPicture } from "../pages/index.js";
-
-export class Card {
+export default class Card {
   constructor(title, link, templateSelector) {
     this._title = title;
     this._link = link;
@@ -27,7 +25,7 @@ export class Card {
   _setEventListners() {
     this._element.querySelector(".element__delete-icon").addEventListener("click", this._deleteCard);
     this._element.querySelector(".element__heart").addEventListener("click", this._likeActive);
-    this._element.querySelector(".element__image").addEventListener("click", () => { openPicture(this._title, this._link) });
+    this._element.querySelector(".element__image").addEventListener("click", this._handleCardClick(this._link, this._name));
   };
 
   generateCard() {
