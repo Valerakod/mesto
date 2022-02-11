@@ -11,6 +11,6 @@ export default class PopupWithImage extends Popup {
     super.open();
     this._image.src = link;
     this._image.alt = title;
-    this._imageText.textCintent = title;
+    this._imageText.textContent = title;
   }
 }

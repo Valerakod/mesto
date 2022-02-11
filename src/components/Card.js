@@ -1,4 +1,4 @@
-import { openPicture } from "../index.js";
+import { openPicture } from "../pages/index.js";
 
 export class Card {
   constructor(title, link, templateSelector) {
