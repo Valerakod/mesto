@@ -57,15 +57,17 @@ function handleCardFormSubmit(evt) {
 }
 formElementAdd.addEventListener("submit", handleCardFormSubmit);
 
+//инициализация userinfo
 const userInfo = new UserInfo({
   userName: profileName,
   userAbout: profileJob
 })
 
-const popupOpenImage = new PopupWithImage(".popup-img");
+//открытие картинки
+const popupOpenImage = new PopupWithImage(".popup__element-image");
 
-function handleCardClick(link, name) {
-  popupOpenImage.open(link, name);
+function handleCardClick(title, link) {
+  popupOpenImage.open(title, link);
 }
 popupOpenImage.setEventListeners();
 

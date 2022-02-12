@@ -29,6 +29,14 @@ module.exports = {
         type: 'asset/resource',
       },
       {
+        test: /\.html$/,
+        loader: 'html-loader',
+        options: {
+          sources: true,
+        },
+        exclude: '/node_modules/'
+      },
+      {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, {
             loader: 'css-loader',
