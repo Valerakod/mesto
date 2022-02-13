@@ -83,18 +83,18 @@ function createCard(title, link) {
 const cardList = new Section(
   {
     items: initialCards,
-    renderer: (item) => cardList.addItem(createCard(item))
+    renderer: (title, link) => cardList.addItem(createCard(title, link))
   },
-  "#card"
+  ".elements"
 );
 cardList.renderItems();
 
 
 //добавление карточки в контейнер
 const newCard = new PopupWithForm(".popup-add", {
-  handleFormSubmit: (item) => {
+  handleFormSubmit: (title, link) => {
     newCard.reset();
-    cardList.addItem(createCard(item));
+    cardList.addItem(createCard(title, link));
   }
 })
 newCard.setEventListeners();
