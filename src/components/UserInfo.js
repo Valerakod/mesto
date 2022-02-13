@@ -16,7 +16,7 @@ export default class UserInfo {
       this._name.textContent = name
     }
     if (about) {
-      this.about.textContent = about
+      this._about.textContent = about
     }
 
   }
