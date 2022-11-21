@@ -107,12 +107,13 @@ const newProfile = new PopupWithForm(".popup-edit", {
       about: data.about
     })
 })
+newProfile.setEventListeners();
 
 //обработчик события при редактировании профиля
 editButton.addEventListener("click", () => {
   formEditProfileValidator.restartFormValidation();
-  const { user, about } = userInfo.getUserInfo();
-  nameInput.value = user
+  const { name, about } = userInfo.getUserInfo();
+  nameInput.value = name
   jobInput.value = about
   newProfile.open();
 });

@@ -4,6 +4,8 @@ export default class Card {
     this._link = link;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._deleteCard = this._deleteCard.bind(this);
+    this._likeActive = this._likeActive.bind(this);
   };
 
   _getTemplate() {
