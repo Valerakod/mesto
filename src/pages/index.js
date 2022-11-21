@@ -17,8 +17,8 @@ const editButton = document.querySelector(".profile__edit-button");
 //const closeButtonImg = document.querySelector(".popup__close-button_img");
 const formElementEdit = document.querySelector(".popup__form_profile");
 const formElementAdd = document.querySelector(".popup__form_add");
-const nameInput = document.getElementById("popup-text-check-name");
-const jobInput = document.getElementById("popup-text-check-job");
+const nameInput = document.querySelector(".popup-text-check-name");
+const jobInput = document.querySelector(".popup-text-check-job");
 const profileName = document.querySelector(".profile__name");
 const profileJob = document.querySelector(".profile__job");
 const addButton = document.querySelector(".profile__add-button");
@@ -48,14 +48,6 @@ function handleProfileFormSubmit(evt) {
 }
 formElementEdit.addEventListener("submit", handleProfileFormSubmit);
 
-//обработчик отправки формы для добавления карточек
-function handleCardFormSubmit(evt) {
-  evt.preventDefault();
-  // Очищаем поля формы
-  newCard.close();
-  formElementAdd.reset();
-}
-formElementAdd.addEventListener("submit", handleCardFormSubmit);
 
 //инициализация userinfo
 const userInfo = new UserInfo({
@@ -64,7 +56,7 @@ const userInfo = new UserInfo({
 })
 
 //открытие картинки
-const popupOpenImage = new PopupWithImage(".popup__element");
+const popupOpenImage = new PopupWithImage(".popup-img");
 
  function handleCardClick(title, link) {
   popupOpenImage.open(title, link);
@@ -92,16 +84,25 @@ cardList.renderItems();
 
 //добавление карточки в контейнер
 const newCard = new PopupWithForm(".popup-add", {
-  handleFormSubmit: (title, link) => {
-    newCard.reset();
+  handleFormSubmit: ({title, link}) => {
+    //newCard.reset();
     cardList.addItem(createCard(title, link));
   }
 })
 newCard.setEventListeners();
 
+//обработчик отправки формы для добавления карточек
+function handleCardFormSubmit(evt) {
+  evt.preventDefault();
+  // Очищаем поля формы
+  newCard.close();
+  formElementAdd.reset();
+}
+formElementAdd.addEventListener("submit", handleCardFormSubmit);
+
 //форма редактирования профиля
 const newProfile = new PopupWithForm(".popup-edit", {
-  handleCardFormSubmit: (data) =>
+  handleFormSubmit: (data) =>
     userInfo.setUserInfo({
       name: data.name,
       about: data.about
