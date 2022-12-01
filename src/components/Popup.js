@@ -4,21 +4,18 @@ export default class Popup {
     this._popupElement = document.querySelector(popupSelector);
     this._handleEscClose = this._handleEscClose.bind(this);
     this._closePopupClickOverlay = this._closePopupClickOverlay.bind(this);
-    //this.setEventListeners();
   }
 
   //открытие попапа
   open() {
     document.addEventListener("keydown", this._handleEscClose);
     this._popupElement.classList.add("popup_opened");
-  //this._popupElement.addEventListener("mousedown", this._closePopupClickOverlay);
   }
 
   //закрытие попапа
   close() {
     this._popupElement.classList.remove("popup_opened");
     document.removeEventListener("keydown", this._handleEscClose);
-    //this._popupElement.removeEventListener("mousedown", this._closePopupClickOverlay);
   }
 
   //закрытие попапа кликом на ESC

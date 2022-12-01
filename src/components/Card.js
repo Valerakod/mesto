@@ -14,6 +14,19 @@ export default class Card {
     return cardElement;
   };
 
+  generateCard() {
+    this._element = this._getTemplate();
+    this._cardElementImage = this._element.querySelector(".element__image");
+    this._cardElementTitle = this._element.querySelector(".element__text");
+    this._cardElementImage.setAttribute("src", this._link);
+    this._cardElementImage.setAttribute("alt", this._title);
+    this._cardElementTitle.textContent = this._title;
+
+    this._setEventListners();
+
+    return this._element;
+  };
+
   //удаление карточки
   _deleteCard = () => {
     this._element.remove();
@@ -28,20 +41,6 @@ export default class Card {
   _setEventListners() {
     this._element.querySelector(".element__delete-icon").addEventListener("click", this._deleteCard);
     this._element.querySelector(".element__heart").addEventListener("click", this._likeActive);
-    this._element.querySelector(".element__image").addEventListener("click", () => this._handleCardClick(this._title, this._link));
-  };
-
-  generateCard() {
-    this._element = this._getTemplate();
-
-    const cardElementImage = this._element.querySelector(".element__image");
-    const cardElementTitle = this._element.querySelector(".element__text");
-    cardElementImage.setAttribute("src", this._link);
-    cardElementImage.setAttribute("alt", this._title);
-    cardElementTitle.textContent = this._title;
-
-    this._setEventListners();
-
-    return this._element;
+    this._cardElementImage.addEventListener("click", () => this._handleCardClick(this._title, this._link));
   };
 }
