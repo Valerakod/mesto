@@ -46,8 +46,8 @@ const deleteConfirmPopup = new PopupWithConfirm(".popup_element_delete-card", {
 });
 //функция создания новых карточек, удаление и рабочий лайк
 function createCard(title, link) {
-  const card = new Card(title, link, "#card", handleCardClick,
-  handleCardDelSubmit: => () {
+  const card = new Card(title, link, "#card", {handleCardClick,
+  handleCardDelSubmit: () => {
     deleteConfirmPopup.submitConfirm(() => {
         deleteConfirmPopup.isLoading(true);
         api.deleteCard(data._id)
@@ -69,7 +69,7 @@ function createCard(title, link) {
         .catch((err) => console.log(`Error with createCard handleAddLike` + err))
 },
   handleDelLike: () => {
-    api.delLike(data._id)
+    api.deleteLike(data._id)
         .then(data => {
             card.isLiked = false;
             card.likeCounter.textContent = data.likes.length;
@@ -77,11 +77,11 @@ function createCard(title, link) {
         })
         .catch((err) => console.log(`Error with handleDelLike` + err))
 
-},
+      }});
+
   const cardElement = card.generateCard();
   return cardElement;
-)}
-
+    }
 //инициализируем класс, ответственный за добавление формы на страницу
 const cardList = new Section(
   {
@@ -126,7 +126,7 @@ const newProfile = new PopupWithForm(".popup-edit", {
     api.editProfileInfo({
       name: nameInput.value,
       about: jobInput.value
-    });
+    })
     .then((data) => {
       userInfo.setUserInfo({
           userName: data.name,

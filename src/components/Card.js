@@ -1,9 +1,12 @@
 export default class Card {
-  constructor(title, link, templateSelector, handleCardClick) {
+  constructor(title, link, templateSelector, handleCardClick, handleCardDelSubmit, handleAddLike, handleDelLike) {
     this._title = title;
     this._link = link;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._handleCardDelSubmit = handleCardDelSubmit;
+    this._handleAddLike = handleAddLike;
+    this._handleDelLike = handleDelLike;
     this._deleteCard = this._deleteCard.bind(this);
     this._likeActive = this._likeActive.bind(this);
   };
