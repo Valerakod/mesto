@@ -6,6 +6,7 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
+import PopupWithConfirm from "../components/PopupWithConfirm";
 import {
   selectors,
   editButton,
@@ -16,7 +17,15 @@ import {
   profileJob,
   addButton,
 } from "../utils/constants.js";
+import Api from "../components/Api.js";
 
+const api = new Api({
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-61",
+  headers: {
+    authorization: "8588e445-30d5-4411-adda-61192e2bff2f",
+    'Content-Type': "application/json"
+  }
+});
 
 //инициализация userinfo
 const userInfo = new UserInfo({
@@ -31,12 +40,47 @@ const popupOpenImage = new PopupWithImage(".popup-img");
 }
   popupOpenImage.setEventListeners();
 
-//функция создания новых карточек
+const deleteConfirmPopup = new PopupWithConfirm(".popup_element_delete-card", {
+    handleFormSubmit: () => {
+    }
+});
+//функция создания новых карточек, удаление и рабочий лайк
 function createCard(title, link) {
-  const card = new Card(title, link, "#card", handleCardClick);
+  const card = new Card(title, link, "#card", handleCardClick,
+  handleCardDelSubmit: => () {
+    deleteConfirmPopup.submitConfirm(() => {
+        deleteConfirmPopup.isLoading(true);
+        api.deleteCard(data._id)
+            .then(() => {
+                card.deleteCard();
+                deleteConfirmPopup.close();
+            })
+            .catch((err) => console.log(`Error with createCard handleCardDelSubmit` + err))
+    });
+    deleteConfirmPopup.open();
+},
+  handleAddLike: () => {
+    api.addLike(data._id)
+        .then(data => {
+            card.isLiked = true;
+            card.likeCounter.textContent = data.likes.length;
+            card.likeButton.classList.toggle("element__heart_active")
+        })
+        .catch((err) => console.log(`Error with createCard handleAddLike` + err))
+},
+  handleDelLike: () => {
+    api.delLike(data._id)
+        .then(data => {
+            card.isLiked = false;
+            card.likeCounter.textContent = data.likes.length;
+            card.likeButton.classList.toggle("element__heart_active")
+        })
+        .catch((err) => console.log(`Error with handleDelLike` + err))
+
+},
   const cardElement = card.generateCard();
   return cardElement;
-}
+)}
 
 //инициализируем класс, ответственный за добавление формы на страницу
 const cardList = new Section(
@@ -52,11 +96,20 @@ cardList.renderItems();
 //добавление карточки в контейнер
 const newCard = new PopupWithForm(".popup-add", {
   handleFormSubmit: ({title, link}) => {
+    newCard.isLoading(true);
+    api.addCard({
+      name: info.PlaceName,
+      link: info.PlaceImage
+  })
+  .then(() => {
     cardList.addItem(createCard(title, link));
 
   newCard.close();
   formElementAdd.reset();
-}})
+})
+.catch((err) => console.log(`Error with newCard` + err))
+}
+});
 newCard.setEventListeners();
 
 
@@ -69,12 +122,21 @@ addButton.addEventListener("click", () => {
 //форма редактирования профиля
 const newProfile = new PopupWithForm(".popup-edit", {
   handleFormSubmit: () => {
-    userInfo.setUserInfo({
+    newProfile.isLoading(true);
+    api.editProfileInfo({
       name: nameInput.value,
       about: jobInput.value
     });
-    newProfile.close();
-}});
+    .then((data) => {
+      userInfo.setUserInfo({
+          userName: data.name,
+          userJob: data.about
+      });
+      newProfile.close();
+  })
+  .catch((err) => console.log(`Error with newProfile` + err))
+}
+});
 newProfile.setEventListeners();
 
 
@@ -86,6 +148,25 @@ editButton.addEventListener("click", () => {
   jobInput.value = about
   newProfile.open();
 });
+
+const popupEditAvatar = new PopupWithForm(".popup-edit", {
+  handleFormSubmit: (info) => {
+      popupEditAvatar.isLoading(true);
+      api.setAvatar({
+          avatar: info.AvatarImage
+      })
+          .then((data) => {
+              userInfo.setUserInfo({
+                  userName: data.name,
+                  userJob: data.about,
+                  userAvatar: data.avatar
+              });
+              popupEditAvatar.close();
+          })
+          .catch((err) => console.log(`Error with popupEditAvatar` + err));
+  }
+});
+
 
 //для каждой формы включаю экземпляр валидатора и включаю валидацию.
 const formEditProfile = document.querySelector(".popup-edit");
