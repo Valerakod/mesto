@@ -16,6 +16,7 @@ import {
   profileName,
   profileJob,
   addButton,
+  profileAvatarEditButton,
 } from "../utils/constants.js";
 import Api from "../components/Api.js";
 
@@ -44,6 +45,8 @@ const deleteConfirmPopup = new PopupWithConfirm(".popup_element_delete-card", {
     handleFormSubmit: () => {
     }
 });
+
+
 //функция создания новых карточек, удаление и рабочий лайк
 function createCard(title, link) {
   const card = new Card(title, link, "#card", {handleCardClick,
@@ -167,6 +170,14 @@ const popupEditAvatar = new PopupWithForm(".popup-edit", {
   }
 });
 
+//обработчик события при редактировании аватара
+profileAvatarEditButton.addEventListener("click", () => {
+  popupEditAvatarFormValidator.restartFormValidation();
+  popupEditAvatar.open();
+});
+
+popupEditAvatar.setEventListeners();
+
 
 //для каждой формы включаю экземпляр валидатора и включаю валидацию.
 const formEditProfile = document.querySelector(".popup-edit");
@@ -177,4 +188,6 @@ const formAddCard = document.querySelector(".popup-add");
 const formAddCardValidator = new FormValidator(selectors, formAddCard);
 formAddCardValidator.enableValidation();
 
-
+const popupEditAvatarForm = document.querySelector(".popup_avatar");
+const popupEditAvatarFormValidator = new FormValidator(selectors, popupEditAvatarForm);
+popupEditAvatarFormValidator.enableValidation();

@@ -17,4 +17,5 @@ export const jobInput = document.querySelector(".popup-text-check-job");
 export const profileName = document.querySelector(".profile__name");
 export const profileJob = document.querySelector(".profile__job");
 export const addButton = document.querySelector(".profile__add-button");
+export const profileAvatarEditButton = document.querySelector(".profile__avatar_edit-button")
 

@@ -1,25 +1,33 @@
 export default class FormValidator {
   constructor(selectors, formElement) {
     this._selectors = selectors;
-    this._submitButton = formElement.querySelector(selectors.submitButtonSelector);
+    this._submitButton = formElement.querySelector(
+      selectors.submitButtonSelector
+    );
     this._formElement = formElement;
-    this._inputList = Array.from(this._formElement.querySelectorAll(this._selectors.inputSelector));
-  };
+    this._inputList = Array.from(
+      this._formElement.querySelectorAll(this._selectors.inputSelector)
+    );
+  }
   // Функция, которая добавляет класс с ошибкой
   _showInputError(inputElement, errorMessage) {
-    const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
+    const errorElement = this._formElement.querySelector(
+      `.${inputElement.id}-error`
+    );
     inputElement.classList.add(this._selectors.inputErrorClass);
     errorElement.classList.add(this._selectors.errorClass);
     errorElement.textContent = errorMessage;
-  };
+  }
 
   // Функция, которая удаляет класс с ошибкой
   _hideInputError(inputElement) {
-    const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
+    const errorElement = this._formElement.querySelector(
+      `.${inputElement.id}-error`
+    );
     inputElement.classList.remove(this._selectors.inputErrorClass);
     errorElement.classList.remove(this._selectors.errorClass);
     errorElement.textContent = " ";
-  };
+  }
 
   // Функция, которая проверяет валидность поля
   _checkInputValidity(inputElement) {
@@ -30,12 +38,12 @@ export default class FormValidator {
       // Если проходит, скроем
       this._hideInputError(inputElement);
     }
-  };
+  }
 
   //проверяем поля ввода на корректность
   _hasInvalidInput() {
-    return this._inputList.some(input => !input.validity.valid)
-  };
+    return this._inputList.some((input) => !input.validity.valid);
+  }
 
   //функция изменения состояния кнопки
   _toggleButtonState() {
@@ -46,7 +54,7 @@ export default class FormValidator {
       this._submitButton.classList.remove(this._selectors.inactiveButtonClass);
       this._submitButton.removeAttribute("disabled");
     }
-  };
+  }
 
   //функция добавляет обработчики сразу всем полям формы
   _setEventListeners() {
@@ -57,7 +65,7 @@ export default class FormValidator {
         this._toggleButtonState();
       });
     });
-  };
+  }
 
   //находим и перебираем все формы на странице
   enableValidation() {

@@ -19,6 +19,7 @@
     <section class="profile">
       <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар">
         <img class="profile__avatar-edit" src="./images/avatar-edit.png" alt="Редактировать аватар">
+        <button class="profile__avatar_edit-button" type="button"></button>
       <div class="profile__info">
         <h1 class="profile__name">Валерия Емец</h1>
         <button class="profile__edit-button" type="button" aria-label="Редактировать профиль">
@@ -112,10 +113,10 @@
       <fieldset class="popup__input-container">
         <label class="popup__field">
       <input class="popup__input" type="url" name="avatar" placeholder="Ссылка на аватар" id="avatar-image" required>
-      <span class="popup__input-error" id="avatar-image-error"></span>
+      <span class="popup__input-error popup_avatar-error" id="popup_avatar-error"></span>
     </label>
   </fieldset>
-      <button class="popup__save-button popup__save-button_inactive" type="submit" disabled>Создать</button>
+      <button class="popup__save-button popup__save-button_inactive" type="submit" disabled>Сохранить</button>
       </form>
       <button class="popup__close-button popup__close-button_edit" type="button" aria-label="Закрыть"></button>
   </div>
