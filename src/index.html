@@ -17,9 +17,13 @@
 
   <main class="content">
     <section class="profile">
+      <div class="profile__avatar-over">
       <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар">
-        <img class="profile__avatar-edit" src="./images/avatar-edit.png" alt="Редактировать аватар">
+
+      <!--<img class="profile__avatar-edit" src="./images/avatar-edit.png" alt="Редактировать аватар">-->
+
         <button class="profile__avatar_edit-button" type="button"></button>
+      </div>
       <div class="profile__info">
         <h1 class="profile__name">Валерия Емец</h1>
         <button class="profile__edit-button" type="button" aria-label="Редактировать профиль">
@@ -44,7 +48,7 @@
   </main>
 
   <footer class="footer">
-    <p class="footer__copyright">&copy; 2022. Валерия Емец</p>
+    <p class="footer__copyright">&copy; 2023. Валерия Емец</p>
   </footer>
 
   <!--popup редактирования профиля-->
@@ -112,7 +116,7 @@
       <h2 class="popup__title">Обновить аватар</h2>
       <fieldset class="popup__input-container">
         <label class="popup__field">
-      <input class="popup__input" type="url" name="avatar" placeholder="Ссылка на аватар" id="avatar-image" required>
+      <input class="popup__input" type="url" name="avatar" placeholder="Ссылка на аватар" id="popup_avatar" required>
       <span class="popup__input-error popup_avatar-error" id="popup_avatar-error"></span>
     </label>
   </fieldset>

@@ -41,6 +41,7 @@ const popupOpenImage = new PopupWithImage(".popup-img");
 }
   popupOpenImage.setEventListeners();
 
+
 const deleteConfirmPopup = new PopupWithConfirm(".popup_element_delete-card", {
     handleFormSubmit: () => {
     }
@@ -152,9 +153,10 @@ editButton.addEventListener("click", () => {
   newProfile.open();
 });
 
-const popupEditAvatar = new PopupWithForm(".popup-edit", {
+//форма редактирования аватара
+const popupEditAvatar = new PopupWithForm(".popup_avatar", {
   handleFormSubmit: (info) => {
-      popupEditAvatar.isLoading(true);
+      //popupEditAvatar.isLoading(true);
       api.setAvatar({
           avatar: info.AvatarImage
       })
