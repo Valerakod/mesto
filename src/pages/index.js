@@ -16,14 +16,17 @@ import {
   profileName,
   profileJob,
   addButton,
+  deleteElement,
+  //popupDeleteConfirmation,
   profileAvatarEditButton,
 } from "../utils/constants.js";
 import Api from "../components/Api.js";
 
+let userId
 const api = new Api({
-  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-61",
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-63",
   headers: {
-    authorization: "8588e445-30d5-4411-adda-61192e2bff2f",
+    authorization: "5fcf59d4-83ea-4773-9206-282bfebd1adc",
     'Content-Type': "application/json"
   }
 });
@@ -42,17 +45,19 @@ const popupOpenImage = new PopupWithImage(".popup-img");
   popupOpenImage.setEventListeners();
 
 
-const deleteConfirmPopup = new PopupWithConfirm(".popup_element_delete-card", {
+//попап удаления карточки
+const deleteConfirmPopup = new PopupWithConfirm(".popup__form_delete-card", {
     handleFormSubmit: () => {
     }
 });
+deleteConfirmPopup.setEventListeners();
 
 
 //функция создания новых карточек, удаление и рабочий лайк
 function createCard(title, link) {
   const card = new Card(title, link, "#card", {handleCardClick,
   handleCardDelSubmit: () => {
-    deleteConfirmPopup.submitConfirm(() => {
+    deleteConfirmPopup.open(() => {
         deleteConfirmPopup.isLoading(true);
         api.deleteCard(data._id)
             .then(() => {
@@ -81,7 +86,9 @@ function createCard(title, link) {
         })
         .catch((err) => console.log(`Error with handleDelLike` + err))
 
-      }});
+      },
+      currentUserId: userId
+    });
 
   const cardElement = card.generateCard();
   return cardElement;
@@ -102,8 +109,8 @@ const newCard = new PopupWithForm(".popup-add", {
   handleFormSubmit: ({title, link}) => {
     newCard.isLoading(true);
     api.addCard({
-      name: info.PlaceName,
-      link: info.PlaceImage
+      title: title,
+      link: link
   })
   .then(() => {
     cardList.addItem(createCard(title, link));
@@ -156,9 +163,9 @@ editButton.addEventListener("click", () => {
 //форма редактирования аватара
 const popupEditAvatar = new PopupWithForm(".popup_avatar", {
   handleFormSubmit: (info) => {
-      //popupEditAvatar.isLoading(true);
+      popupEditAvatar.isLoading(true);
       api.setAvatar({
-          avatar: info.AvatarImage
+          avatar: info.avatar
       })
           .then((data) => {
               userInfo.setUserInfo({
@@ -181,6 +188,22 @@ profileAvatarEditButton.addEventListener("click", () => {
 popupEditAvatar.setEventListeners();
 
 
+const cardsData = api.getInitialCards();
+const getUserData = api.getUserInfo();
+
+Promise.all([cardsData, getUserData])
+    .then(([data, user]) => {
+        userInfo.setUserInfo({
+            userName: user.name,
+            userJob: user.about,
+            userAvatar: user.avatar
+        });
+        userId = user._id;
+        cardList.renderItems(data);
+    })
+    .catch((err) => console.log(`Error with promises...` + err));
+
+
 //для каждой формы включаю экземпляр валидатора и включаю валидацию.
 const formEditProfile = document.querySelector(".popup-edit");
 const formEditProfileValidator = new FormValidator(selectors, formEditProfile);
@@ -193,3 +216,4 @@ formAddCardValidator.enableValidation();
 const popupEditAvatarForm = document.querySelector(".popup_avatar");
 const popupEditAvatarFormValidator = new FormValidator(selectors, popupEditAvatarForm);
 popupEditAvatarFormValidator.enableValidation();
+

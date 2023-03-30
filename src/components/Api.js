@@ -1,7 +1,7 @@
 export default class Api {
-    constructor(baseUrl, headers) {
-        this.baseUrl = baseUrl;
-        this.headers = headers;
+    constructor(options) {
+        this._baseUrl = options.baseUrl;
+        this._headers = options.headers;
     }
 
     returnResultStatus(res) {

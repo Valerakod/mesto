@@ -4,7 +4,7 @@ export default class PopupWithConfirm extends Popup {
   constructor(popupSelector, { clickHandleCallBack }) {
     super(popupSelector);
     this._clickHandleCallBack = clickHandleCallBack;
-    this._buttonDelete = this._popupElement.querySelector(".popup__delete-card");
+    this._buttonDelete = this._popupElement.querySelector(".element__delete-icon");
   }
 
   _setEventListeners(){
