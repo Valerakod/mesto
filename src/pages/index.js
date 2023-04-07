@@ -1,6 +1,6 @@
 import "./index.css"
 import Card from "../components/Card.js";
-import initialCards from "../components/initial-cards.js";
+//import initialCards from "../components/initial-cards.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
@@ -15,6 +15,7 @@ import {
   jobInput,
   profileName,
   profileJob,
+  profileAvatar,
   addButton,
   deleteElement,
   //popupDeleteConfirmation,
@@ -34,40 +35,39 @@ const api = new Api({
 //инициализация userinfo
 const userInfo = new UserInfo({
   userName: profileName,
-  userAbout: profileJob
+  userAbout: profileJob,
+  userAvatar: profileAvatar
 })
 
 //открытие картинки
 const popupOpenImage = new PopupWithImage(".popup-img");
- function handleCardClick(title, link) {
-  popupOpenImage.open(title, link);
-}
+
   popupOpenImage.setEventListeners();
 
 
 //попап удаления карточки
 const deleteConfirmPopup = new PopupWithConfirm(".popup__form_delete-card", {
-    handleFormSubmit: () => {
-    }
-});
+  handleCardDelSubmit: (cardId, element) => {
+      api.deleteCard(cardId)
+      .then(() => {
+        element.remove();
+        element = null;
+        deleteConfirmPopup.close();
+
+  })
+    .catch((err) => console.log(`Error with createCard handleCardDelSubmit` + err))
+  }
+})
 deleteConfirmPopup.setEventListeners();
 
 
 //функция создания новых карточек, удаление и рабочий лайк
-function createCard(title, link) {
-  const card = new Card(title, link, "#card", {handleCardClick,
-  handleCardDelSubmit: () => {
-    deleteConfirmPopup.open(() => {
-        deleteConfirmPopup.isLoading(true);
-        api.deleteCard(data._id)
-            .then(() => {
-                card.deleteCard();
-                deleteConfirmPopup.close();
-            })
-            .catch((err) => console.log(`Error with createCard handleCardDelSubmit` + err))
-    });
-    deleteConfirmPopup.open();
-},
+function createCard(data, templateSelector) {
+  const card = new Card({
+    data: data,
+    handleCardClick: () => {
+      popupOpenImage.open(data.title, data.link);
+    },
   handleAddLike: () => {
     api.addLike(data._id)
         .then(data => {
@@ -88,7 +88,7 @@ function createCard(title, link) {
 
       },
       currentUserId: userId
-    });
+    }, templateSelector);
 
   const cardElement = card.generateCard();
   return cardElement;
@@ -96,24 +96,23 @@ function createCard(title, link) {
 //инициализируем класс, ответственный за добавление формы на страницу
 const cardList = new Section(
   {
-    items: initialCards,
-    renderer: (title, link) => cardList.addItem(createCard(title, link))
+
+    renderer: (data) => cardList.addItem(createCard(data, "#card"))
   },
   ".elements"
 );
-cardList.renderItems();
 
 
 //добавление карточки в контейнер
 const newCard = new PopupWithForm(".popup-add", {
-  handleFormSubmit: ({title, link}) => {
+  handleFormSubmit: (data) => {
     newCard.isLoading(true);
     api.addCard({
-      title: title,
-      link: link
+      title: data.title,
+      link: data.link
   })
   .then(() => {
-    cardList.addItem(createCard(title, link));
+    cardList.addItem(createCard(data, "#card"));
 
   newCard.close();
   formElementAdd.reset();
@@ -140,8 +139,8 @@ const newProfile = new PopupWithForm(".popup-edit", {
     })
     .then((data) => {
       userInfo.setUserInfo({
-          userName: data.name,
-          userJob: data.about
+          name: data.name,
+          about: data.about
       });
       newProfile.close();
   })
@@ -169,9 +168,9 @@ const popupEditAvatar = new PopupWithForm(".popup_avatar", {
       })
           .then((data) => {
               userInfo.setUserInfo({
-                  userName: data.name,
-                  userJob: data.about,
-                  userAvatar: data.avatar
+                  name: data.name,
+                  about: data.about,
+                  avatar: data.avatar
               });
               popupEditAvatar.close();
           })
@@ -194,9 +193,9 @@ const getUserData = api.getUserInfo();
 Promise.all([cardsData, getUserData])
     .then(([data, user]) => {
         userInfo.setUserInfo({
-            userName: user.name,
-            userJob: user.about,
-            userAvatar: user.avatar
+            name: user.name,
+            about: user.about,
+            avatar: user.avatar
         });
         userId = user._id;
         cardList.renderItems(data);
