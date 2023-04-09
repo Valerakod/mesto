@@ -43,8 +43,8 @@ export default class Api {
                 method: 'POST',
                 headers: this._headers,
                 body: JSON.stringify({
-                    title,
-                    link
+                    name: title,
+                    link: link
                 })
             }
         )

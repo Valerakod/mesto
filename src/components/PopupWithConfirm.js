@@ -7,11 +7,15 @@ export default class PopupWithConfirm extends Popup {
     this._handleCardDelSubmit = handleCardDelSubmit;
   }
 
+  setSubmitAction(action) {
+    this._handleCardDelSubmit = action;
+  }
+
   _setEventListeners(){
     super.setEventListeners();
     this._buttonDelete.addEventListener("click", (evt) => {
         evt.preventDefault();
-        this._handleCardDelSubmit(this._cardId, this._element);
+        this._handleCardDelSubmit();
     });
   }
 

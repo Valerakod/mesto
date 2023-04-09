@@ -1,6 +1,5 @@
 import "./index.css"
 import Card from "../components/Card.js";
-//import initialCards from "../components/initial-cards.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
@@ -37,36 +36,31 @@ const userInfo = new UserInfo({
   userName: profileName,
   userAbout: profileJob,
   userAvatar: profileAvatar
-})
+}
+)
 
 //открытие картинки
 const popupOpenImage = new PopupWithImage(".popup-img");
 
   popupOpenImage.setEventListeners();
 
+  //api.getUserInfo()
+  //.then((userData) => {
+  //  userInfo = setUserInfo(userData._id)
+  //});
 
 //попап удаления карточки
-const deleteConfirmPopup = new PopupWithConfirm(".popup__form_delete-card", {
-  handleCardDelSubmit: (cardId, element) => {
-      api.deleteCard(cardId)
-      .then(() => {
-        element.remove();
-        element = null;
-        deleteConfirmPopup.close();
-
-  })
-    .catch((err) => console.log(`Error with createCard handleCardDelSubmit` + err))
-  }
-})
-deleteConfirmPopup.setEventListeners();
+const removeCardConfirm = new PopupWithConfirm(".popup__form_delete-card");
+removeCardConfirm.setEventListeners();
 
 
 //функция создания новых карточек, удаление и рабочий лайк
 function createCard(data, templateSelector) {
   const card = new Card({
     data: data,
+   // userInfo: getUserInfo,
     handleCardClick: () => {
-      popupOpenImage.open(data.title, data.link);
+      popupOpenImage.open(data.name, data.link);
     },
   handleAddLike: () => {
     api.addLike(data._id)
@@ -85,7 +79,18 @@ function createCard(data, templateSelector) {
             card.likeButton.classList.toggle("element__heart_active")
         })
         .catch((err) => console.log(`Error with handleDelLike` + err))
-
+      },
+      handleCardDelSubmit: (card) => {
+        removeCardConfirm.open();
+        console.log(card);
+        removeCardConfirm.setSubmitAction(() => {
+          api.deleteCard(card._id)
+          .then(() => {
+            card.deleteCard();
+            removeCardConfirm.close();
+          });
+        })
+        //.catch((err) => console.log(`Error with createCard handleCardDelSubmit` + err))
       },
       currentUserId: userId
     }, templateSelector);
@@ -106,12 +111,13 @@ const cardList = new Section(
 //добавление карточки в контейнер
 const newCard = new PopupWithForm(".popup-add", {
   handleFormSubmit: (data) => {
+
     newCard.isLoading(true);
     api.addCard({
       title: data.title,
       link: data.link
   })
-  .then(() => {
+  .then((data) => {
     cardList.addItem(createCard(data, "#card"));
 
   newCard.close();
@@ -191,16 +197,19 @@ const cardsData = api.getInitialCards();
 const getUserData = api.getUserInfo();
 
 Promise.all([cardsData, getUserData])
+//.catch((err) => console.log(`Error with promises...` + err));
     .then(([data, user]) => {
+
         userInfo.setUserInfo({
             name: user.name,
             about: user.about,
             avatar: user.avatar
         });
         userId = user._id;
+
         cardList.renderItems(data);
-    })
-    .catch((err) => console.log(`Error with promises...` + err));
+    });
+
 
 
 //для каждой формы включаю экземпляр валидатора и включаю валидацию.
