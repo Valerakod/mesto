@@ -17,9 +17,6 @@
 
   <main class="content">
     <section class="profile">
-
-
-
           <a class="profile__avatar_edit-button" type="button">
             <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар">
           </a>
@@ -39,9 +36,10 @@
         <article class="element">
           <img class="element__image" src="./images/karachevsk.jpg" alt="Карачaевск">
           <h2 class="element__text">Карачaевск</h2>
-          <button class="element__heart" type="button" aria-label="Поставить лайк">
+          <div class="element__like">
+          <button class="element__heart" type="button" aria-label="Поставить лайк"></button>
             <p class="element__heart-count"></p>
-          </button>
+          </div>
           <button class="element__delete-icon" type="button" aria-label="Удалить"></button>
         </article>
       </template>
@@ -133,7 +131,7 @@
   <div class="popup__container">
     <form class="popup__form popup__form_delete-card" name="popup">
     <h2 class="popup__title">Вы уверены?</h2>
-      <button class="popup__save-button  popup__delete-card" type="button">Да</button>
+      <button class="popup__save-button  popup__delete-card" type="submit">Да</button>
       <button class="popup__close-button popup__close-button_edit" type="button" aria-label="Закрыть"></button>
     </form>
   </div>

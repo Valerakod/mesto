@@ -12,8 +12,7 @@ export default class Card {
     this._cardId = data._id;
     this._ownerId = data.owner._id;
     this._currentUserId = currentUserId;
-    this._deleteCard = this._deleteCard.bind(this);
-
+    this.deleteCard = this.deleteCard.bind(this);
   };
 
   _getTemplate() {
@@ -44,7 +43,7 @@ export default class Card {
   };
 
   //удаление карточки
-  _deleteCard = () => {
+  deleteCard = () => {
     this._element.remove();
     this._element = null;
   };

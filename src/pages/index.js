@@ -46,11 +46,11 @@ const popupOpenImage = new PopupWithImage(".popup-img");
 
   //api.getUserInfo()
   //.then((userData) => {
-  //  userInfo = setUserInfo(userData._id)
+   // userInfo = setUserInfo(userData._id)
   //});
 
 //попап удаления карточки
-const removeCardConfirm = new PopupWithConfirm(".popup__form_delete-card");
+const removeCardConfirm = new PopupWithConfirm(".popup_element_delete-card");
 removeCardConfirm.setEventListeners();
 
 
@@ -84,7 +84,7 @@ function createCard(data, templateSelector) {
         removeCardConfirm.open();
         console.log(card);
         removeCardConfirm.setSubmitAction(() => {
-          api.deleteCard(card._id)
+          api.deleteCard(card._cardId)
           .then(() => {
             card.deleteCard();
             removeCardConfirm.close();
