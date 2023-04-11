@@ -9,6 +9,7 @@
   align-items: center;
   overflow: hidden;
   position: relative;
+  width: 282px;
 }
 
 @media (max-width: 767px) and (min-width: 320px) {

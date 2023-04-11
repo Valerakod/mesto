@@ -7,6 +7,7 @@ export default class PopupWithForm extends Popup {
     this._inputList = this._popupElement.querySelectorAll(".popup__input");
     this._formElement = this._popupElement.querySelector(".popup__form");
     this._saveButtonText = this._popupElement.querySelector(".popup__save-button").textContent;
+    this._saveButton = this._formElement.querySelector(".popup__save-button")
   }
 
   //метод собирает данные всех полей формы
@@ -29,21 +30,16 @@ export default class PopupWithForm extends Popup {
     })
   }
 
-  open() {
-    super.open();
-  }
-
   close() {
     super.close();
     this._formElement.reset();
   }
 
   isLoading(loading) {
-    const saveButton = this._formElement.querySelector(".popup__save-button")
     if (loading) {
-        saveButton.textContent = "Сохранение..."
+        this._saveButton.textContent = "Сохранение..."
     } else {
-        saveButton.textContent = this._saveButtonText
+        this._saveButton.textContent = this._saveButtonText
     }
 }
 }

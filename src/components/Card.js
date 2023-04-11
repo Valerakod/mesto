@@ -31,12 +31,7 @@ export default class Card {
     this._cardElementImage.setAttribute("src", this._link);
     this._cardElementImage.setAttribute("alt", this._name);
     this._cardElementTitle.textContent = this._name;
-    this._likes.forEach(element => {
-      if (element._id === this._currentUserId) {
-          this.likeButton.classList.add("element__heart_active");
-          this.isLiked = true
-      }
-  });
+
 
     this._setEventListners();
     return this._element;
@@ -47,6 +42,16 @@ export default class Card {
     this._element.remove();
     this._element = null;
   };
+
+
+  //  метод, который принимает обновленный массив лайков в аргументе, обновляет счетчик и перекрашивает кнопку
+  handleLikeCard(data) {
+    console.log(data);
+    this.likeCounter.textContent = data.likes.length;
+    this.likeButton.classList.toggle("element__heart_active");
+    this._likes = data.likes;
+  }
+
 
   _setEventListners() {
     this._deleteButton = this._element.querySelector(".element__delete-icon");

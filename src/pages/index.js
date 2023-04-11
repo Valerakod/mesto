@@ -44,10 +44,6 @@ const popupOpenImage = new PopupWithImage(".popup-img");
 
   popupOpenImage.setEventListeners();
 
-  //api.getUserInfo()
-  //.then((userData) => {
-   // userInfo = setUserInfo(userData._id)
-  //});
 
 //попап удаления карточки
 const removeCardConfirm = new PopupWithConfirm(".popup_element_delete-card");
@@ -58,26 +54,21 @@ removeCardConfirm.setEventListeners();
 function createCard(data, templateSelector) {
   const card = new Card({
     data: data,
-   // userInfo: getUserInfo,
     handleCardClick: () => {
       popupOpenImage.open(data.name, data.link);
     },
   handleAddLike: () => {
     api.addLike(data._id)
-        .then(data => {
-            card.isLiked = true;
-            card.likeCounter.textContent = data.likes.length;
-            card.likeButton.classList.toggle("element__heart_active")
-        })
+    .then((data) => {
+      card.handleLikeCard(data);
+    })
         .catch((err) => console.log(`Error with createCard handleAddLike` + err))
 },
   handleDelLike: () => {
     api.deleteLike(data._id)
-        .then(data => {
-            card.isLiked = false;
-            card.likeCounter.textContent = data.likes.length;
-            card.likeButton.classList.toggle("element__heart_active")
-        })
+    .then((data) => {
+      card.handleLikeCard(data);
+    })
         .catch((err) => console.log(`Error with handleDelLike` + err))
       },
       handleCardDelSubmit: (card) => {
@@ -90,7 +81,7 @@ function createCard(data, templateSelector) {
             removeCardConfirm.close();
           });
         })
-        //.catch((err) => console.log(`Error with createCard handleCardDelSubmit` + err))
+        .catch((err) => console.log(`Error with createCard handleCardDelSubmit` + err))
       },
       currentUserId: userId
     }, templateSelector);
@@ -111,7 +102,6 @@ const cardList = new Section(
 //добавление карточки в контейнер
 const newCard = new PopupWithForm(".popup-add", {
   handleFormSubmit: (data) => {
-
     newCard.isLoading(true);
     api.addCard({
       title: data.title,
@@ -124,6 +114,9 @@ const newCard = new PopupWithForm(".popup-add", {
   formElementAdd.reset();
 })
 .catch((err) => console.log(`Error with newCard` + err))
+.finally(() => {
+  newCard.isLoading(false)
+})
 }
 });
 newCard.setEventListeners();
@@ -137,11 +130,12 @@ addButton.addEventListener("click", () => {
 
 //форма редактирования профиля
 const newProfile = new PopupWithForm(".popup-edit", {
-  handleFormSubmit: () => {
+  handleFormSubmit: (data) => {
     newProfile.isLoading(true);
+    console.log(data);
     api.editProfileInfo({
-      name: nameInput.value,
-      about: jobInput.value
+      name: data.name,
+      about: data.about
     })
     .then((data) => {
       userInfo.setUserInfo({
@@ -197,7 +191,6 @@ const cardsData = api.getInitialCards();
 const getUserData = api.getUserInfo();
 
 Promise.all([cardsData, getUserData])
-//.catch((err) => console.log(`Error with promises...` + err));
     .then(([data, user]) => {
 
         userInfo.setUserInfo({
@@ -205,10 +198,12 @@ Promise.all([cardsData, getUserData])
             about: user.about,
             avatar: user.avatar
         });
+
         userId = user._id;
 
         cardList.renderItems(data);
-    });
+    })
+    .catch((err) => console.log(`Error with promises...` + err));
 
 
 
