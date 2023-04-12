@@ -15,4 +15,6 @@
 .profile__avatar-img:hover {
   background-color: rgba(0, 0, 0, 0.8);
   background-image: url(../../../images/avatar-edit.png);
+  opacity: 0.2;
+  transition: 1s;
 }

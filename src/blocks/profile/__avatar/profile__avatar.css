@@ -1,5 +1,4 @@
 .profile__avatar {
-background-image: url(../../../images/avatar-edit.png);
 width: 120px;
 height: 120px;
 border-radius: 50%;
@@ -8,14 +7,15 @@ object-fit: cover;
 background-repeat: no-repeat;
 background-position: center;
 justify-self: center;
-transition: 0.5s;
+transition: 1s;
 cursor: pointer;
 }
 
 .profile__avatar:hover {
-opacity: 0.6;
-background: rgba(0, 0, 0, 0.8);
-
+background-image: url(../../../images/avatar-edit.png);
+background-color: rgba(0, 0, 0, 0.8);
+transition: 1s;
+cursor: pointer;
 
 }
 

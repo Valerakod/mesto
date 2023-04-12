@@ -5,7 +5,7 @@ export default class Card {
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._handleCardDelSubmit = handleCardDelSubmit;
-    this.likesCounter = this._element.querySelector(".element__heart-count");
+    //this.likesCounter = this._element.querySelector(".element__heart-count");
     this._handleLikeCard = handleLikeCard;
     this.isLiked = false;
     this._likes = data.likes;
@@ -26,6 +26,7 @@ export default class Card {
     this._cardElementImage = this._element.querySelector(".element__image");
     this._cardElementTitle = this._element.querySelector(".element__text");
     this.likeButton = this._element.querySelector(".element__heart");
+    this.likesCounter = this._element.querySelector(".element__heart-count");
     this.likesCounter.textContent = this._likes.length;
     this._cardElementImage.setAttribute("src", this._link);
     this._cardElementImage.setAttribute("alt", this._name);
