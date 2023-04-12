@@ -3,7 +3,7 @@
   opacity: 0;
   display: flex;
   transition: opacity 0.5s, visibility 0.5s linear;
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   left: 0;
   top: 0;

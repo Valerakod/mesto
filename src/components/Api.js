@@ -12,7 +12,9 @@ export default class Api {
     }
 
     getUserInfo() {
-        return fetch(this._baseUrl + '/users/me', {headers: this._headers})
+        return fetch(this._baseUrl + '/users/me', {
+            method: 'GET',
+            headers: this._headers})
             .then(this.returnResultStatus)
     }
 
@@ -21,7 +23,7 @@ export default class Api {
             .then(this.returnResultStatus)
     }
 
-    editProfileInfo({name, about}) {
+    editProfileInfo(name, about) {
         return fetch(
             this._baseUrl + '/users/me',
             {

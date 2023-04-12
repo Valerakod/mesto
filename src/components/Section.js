@@ -6,14 +6,14 @@ export default class Section {
   };
 
 
-  //setItemAppend(item) {
-    //this._container.append(item);
-  //}
+  setItemAppend(element) {
+    this._container.append(element);
+  }
 
   renderItems(items) {
-    //setItemAppen();
-    items.forEach(item => {
-      this._renderer(item)
+
+    items.forEach(element => {
+      this._renderer(element)
     })
   };
 

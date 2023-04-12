@@ -53,25 +53,22 @@ removeCardConfirm.setEventListeners();
 //функция создания новых карточек, удаление и рабочий лайк
 function createCard(data, templateSelector) {
   const card = new Card({
-    data: data,
+    data,
     handleCardClick: () => {
       popupOpenImage.open(data.name, data.link);
     },
-  handleAddLike: () => {
-    api.addLike(data._id)
-    .then((data) => {
-      card.handleLikeCard(data);
-    })
-        .catch((err) => console.log(`Error with createCard handleAddLike` + err))
-},
-  handleDelLike: () => {
-    api.deleteLike(data._id)
-    .then((data) => {
-      card.handleLikeCard(data);
-    })
-        .catch((err) => console.log(`Error with handleDelLike` + err))
-      },
-      handleCardDelSubmit: (card) => {
+    handleLikeCard: (card) => {
+    if (card.hasCurrentUserLike()) {
+      api.deleteLike(card._cardId)
+        .then((data) => {
+        card.updateLikes(data);
+      });
+    } else {
+      api.addLike(card._cardId)
+      .then((data) => {
+        card.updateLikes(data);
+      })}},
+    handleCardDelSubmit: (card) => {
         removeCardConfirm.open();
         console.log(card);
         removeCardConfirm.setSubmitAction(() => {
@@ -86,14 +83,16 @@ function createCard(data, templateSelector) {
       currentUserId: userId
     }, templateSelector);
 
+
   const cardElement = card.generateCard();
   return cardElement;
-    }
+  }
+
 //инициализируем класс, ответственный за добавление формы на страницу
 const cardList = new Section(
   {
 
-    renderer: (data) => cardList.addItem(createCard(data, "#card"))
+    renderer: (data) => cardList.setItemAppend(createCard(data, "#card"))
   },
   ".elements"
 );
@@ -132,22 +131,25 @@ addButton.addEventListener("click", () => {
 const newProfile = new PopupWithForm(".popup-edit", {
   handleFormSubmit: (data) => {
     newProfile.isLoading(true);
-    console.log(data);
-    api.editProfileInfo({
-      name: data.name,
-      about: data.about
-    })
+
+    api.editProfileInfo(
+      data["popup-text-check-name"],
+      data["popup-text-check-job"]
+  )
     .then((data) => {
       userInfo.setUserInfo({
+
           name: data.name,
           about: data.about
       });
+      newProfile.isLoading(false);
       newProfile.close();
   })
   .catch((err) => console.log(`Error with newProfile` + err))
 }
 });
 newProfile.setEventListeners();
+
 
 
 //обработчик события при редактировании профиля

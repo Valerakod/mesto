@@ -1,12 +1,12 @@
 export default class Card {
-  constructor({data, currentUserId, handleCardClick, handleCardDelSubmit, handleAddLike, handleDelLike}, templateSelector) {
+  constructor({data, handleCardClick, handleCardDelSubmit, handleLikeCard, currentUserId}, templateSelector) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._handleCardDelSubmit = handleCardDelSubmit;
-    this._handleAddLike = handleAddLike;
-    this._handleDelLike = handleDelLike;
+    this.likesCounter = this._element.querySelector(".element__heart-count");
+    this._handleLikeCard = handleLikeCard;
     this.isLiked = false;
     this._likes = data.likes;
     this._cardId = data._id;
@@ -26,8 +26,7 @@ export default class Card {
     this._cardElementImage = this._element.querySelector(".element__image");
     this._cardElementTitle = this._element.querySelector(".element__text");
     this.likeButton = this._element.querySelector(".element__heart");
-    this.likeCounter = this._element.querySelector(".element__heart-count")
-    this.likeCounter.textContent = this._likes.length;
+    this.likesCounter.textContent = this._likes.length;
     this._cardElementImage.setAttribute("src", this._link);
     this._cardElementImage.setAttribute("alt", this._name);
     this._cardElementTitle.textContent = this._name;
@@ -45,13 +44,22 @@ export default class Card {
 
 
   //  метод, который принимает обновленный массив лайков в аргументе, обновляет счетчик и перекрашивает кнопку
-  handleLikeCard(data) {
-    console.log(data);
-    this.likeCounter.textContent = data.likes.length;
-    this.likeButton.classList.toggle("element__heart_active");
+  updateLikes(data) {
     this._likes = data.likes;
+    console.log(data)
+      this.likesCounter.textContent = this._likes.length;
+      if  (this._likes.find((data) => data._id === this._currentUserId)) {
+        this.likeButton.classList.add("element__heart_active");
+      } else {
+        this.likeButton.classList.remove("element__heart_active");
+      }
   }
 
+
+   //проверяем, есть ли текущий пользователь среди лайкнувших
+   hasCurrentUserLike() {
+    return !!this._likes.find((like) => like._id === this._currentUserId)
+   }
 
   _setEventListners() {
     this._deleteButton = this._element.querySelector(".element__delete-icon");
@@ -61,13 +69,9 @@ export default class Card {
         if (this._currentUserId !== this._ownerId) {
             this._deleteButton.remove()
         }
-        this.likeButton.addEventListener("click", () => {
-            if (this.isLiked) {
-                this._handleDelLike(this._cardId)
-            } else {
-                this._handleAddLike(this._cardId)
-            }
-        });
+       this.likeButton.addEventListener("click", () => {
+        this._handleLikeCard(this)
+    });
 
     this._cardElementImage.addEventListener("click", () => this._handleCardClick(this._name, this._link));
   };
